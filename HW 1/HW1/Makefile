@@ -1,5 +1,5 @@
 CFLAGS		= -g
-OBJFILES	= Stack.o Queue.o hw1.o
+OBJFILES	= stack.o xFile.o tree.o
 
 ###################################################
 # Default rules for compiling C++ programs 	  #
@@ -10,14 +10,15 @@ OBJFILES	= Stack.o Queue.o hw1.o
 .cpp .o:
 		g++ $(CFLAGS) -c $*.cpp
 
-hw1:		$(OBJFILES)
-		g++ -o hw1 $(CFLAGS) $(OBJFILES)
+xFile:		$(OBJFILES)
+		g++ -o xFIle $(CFLAGS) $(OBJFILES)
 
-hw1.o:		hw1.cpp Queue.h Stack.h
 
-Stack.o:	Stack.cpp Stack.h
+xFile.o:	stack.h xFile.cpp tree.h
 
-Queue.o:	Queue.cpp Queue.h
+stack.o:	Stack.h Stack.cpp
+
+tree.o:		tree.h tree.cpp
 
 clean:
 		rm -f *.o
