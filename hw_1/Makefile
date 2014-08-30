@@ -11,12 +11,12 @@ OBJFILES	= stack.o xFile.o tree.o
 		g++ $(CFLAGS) -c $*.cpp
 
 xFile:		$(OBJFILES)
-		g++ -o xFIle $(CFLAGS) $(OBJFILES)
+		g++ -o xFile $(CFLAGS) $(OBJFILES)
 
 
 xFile.o:	stack.h xFile.cpp tree.h
 
-stack.o:	Stack.h Stack.cpp
+stack.o:	stack.h stack.cpp
 
 tree.o:		tree.h tree.cpp
 
