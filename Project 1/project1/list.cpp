@@ -1,3 +1,8 @@
+/*
+  Brett Worley
+  CS 3100 - 01
+  8/28/14 */
+
 #include <iostream>
 
 #include "list.h"
@@ -31,7 +36,7 @@ List<T>::List( int numItems, const T items[] )
 {
 	m_head = NULL;
 	Node<T>* tail = NULL;
-	
+
 	if ( numItems > 0 )
 	{
 		m_head = tail = new Node<T>( items[0] );
@@ -62,7 +67,7 @@ List<T>& List<T>::operator=( List& L )
 		releaseList();
 	}
 	copyList( L );
-	
+
 	return *this;
 }
 
@@ -92,6 +97,17 @@ void List<T>::makeCycle( int K )
 template <typename T>
 void List<T>::unique()
 {
+    T data;
+
+    if(m_head != NULL){
+        data = m_head->m_data;
+    }
+
+    for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
+
+        if(data == next->m_link->m_data){
+        }
+    }
 }
 
 template <typename T>
@@ -149,7 +165,7 @@ void List<T>::copyList( List& L )
 {
 	m_head = NULL;
 	Node<T>* tail = NULL;
-	
+
 	if ( L.m_head != NULL )
 	{
 		m_head = tail = new Node<T>( L.m_head->m_data );

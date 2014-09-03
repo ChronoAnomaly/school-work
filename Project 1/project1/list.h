@@ -1,3 +1,8 @@
+/*
+  Brett Worley
+  CS 3100 - 01
+  8/28/14 */
+
 #ifndef _LIST_
 
 #define _LIST_
