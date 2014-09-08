@@ -150,17 +150,23 @@ void List<T>:: mergeSort( List<T>& L2 )
 // LIST PRIVATE MEMBER FUNCTIONS
 
 /*
-	
+	removeNode: This function is used to remove a single node from the list.  The arg ptr
+	will be the previous node from the target to remove. After removing the target node 
+	from the list, we will then delete it.
 	*/
 template <typename T>
-void List<T>::removeNode( Node<T>& ptr)
+void List<T>::removeNode( Node<T>* ptr)
 {
 	if(ptr == NULL || ptr->m_link == NULL) {
 	
 		cout << "Error: NULL node" << endl;
+	} else {
+
+		Node<T>* target = ptr->m_link;
+
+		ptr->m_link = target->m_link;
 	}
 	
-	ptr->m_link =
 }
 template <typename T>
 void List<T>::releaseList()

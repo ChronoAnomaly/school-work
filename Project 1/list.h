@@ -56,7 +56,7 @@ class List {
 		Node<T>*	m_head;
 		
 	private:
-		void removeNode( Node<T>&);
+		void removeNode( Node<T>*);
 		void releaseList();
 		void copyList( List& );
 		
