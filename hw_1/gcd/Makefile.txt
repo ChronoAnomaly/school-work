@@ -1,0 +1,6 @@
+CFLAGS		= -g
+MAINFILE	= gcd.cpp
+
+
+gcd:	
+		g++ $(CFLAGS) -o gcd $(MAINFILE)
