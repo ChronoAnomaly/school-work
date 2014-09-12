@@ -57,7 +57,9 @@ List<T>::List( List& L )
 template <typename T>
 List<T>::~List()
 {
+	cout << "entering destructor" << endl;
 	releaseList();
+	cout << "exiting constructor" << endl;
 }
 
 template <typename T>
@@ -196,7 +198,7 @@ void List<T>::releaseList()
 	{
 		Node<T>* doomed = m_head;
 		m_head = m_head->m_link;
-		delete [] doomed;
+		delete  doomed;
 	}
 }
 
@@ -220,4 +222,7 @@ void List<T>::copyList( List& L )
 
 template class Node<int>;
 template class List<int>;
-
+template class Node<double>;
+template class List<double>;
+template class Node<string>;
+template class List<string>;
