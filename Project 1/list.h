@@ -18,7 +18,7 @@ class Node {
 		Node( T );
 		Node( T, Node* );
 		
-		T 		m_data;
+		T	m_data;
 		Node*	m_link;
 		
 		template <typename sT> friend class List;
@@ -41,9 +41,14 @@ class List {
 		}
 		
 		// Programming Assignment 1
+		/* Dectects if the list has a cycle */
 		bool hasCycle();
+		/* Creates a cycle withen the list, linking the last node with the node
+		being passed */
 		void makeCycle( int );
+		/* Makes the current list unique by removing any duplicates from the list */
 		void unique();
+		/* Removes any consecutive duplicate node in the current list */
 		void removeDuplicates();
 		void reverse();
 		void recursiveReverse();
@@ -56,6 +61,8 @@ class List {
 		Node<T>*	m_head;
 		
 	private:
+		/* Used to remove a single node from the list. The passed node must be the
+		previous node of the targeted node. */
 		void removeNode( Node<T>*);
 		void releaseList();
 		void copyList( List& );

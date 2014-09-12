@@ -1,7 +1,8 @@
 /*
   Brett Worley
   CS 3100 - 01
-  8/28/14 */
+  8/28/14
+*/
 
 #include <iostream>
 
@@ -89,9 +90,29 @@ bool List<T>::hasCycle()
 	return true;
 }
 
+/*
+	Goes through the list until the k'th node. Then a pointer will be made and go to the
+	end of the list and set the last nodes link to the k'th node.
+
+*/
 template <typename T>
 void List<T>::makeCycle( int K )
 {
+	Node<T>* next = m_head;
+	
+	for(int i = 1; next != NULL && i < K; i++){
+		
+		next = next->m_link;
+	}
+	
+	Node<T>* ptr = next->m_link;
+
+	while(ptr != NULL && ptr->m_link != NULL){
+	
+		ptr = ptr->m_link;
+	}
+
+	ptr->m_link = next;
 }
 
 template <typename T>
