@@ -122,27 +122,40 @@ void List<T>::makeCycle( int K )
 	ptr->m_link = next;
 }
 
+/*
+	Goes through the list checking a signle node against the rest of the list.  If
+	another node is found to have the same data as the current node, then that node
+	will be removed from the linked list.
+*/
 template <typename T>
 void List<T>::unique()
 {
 	T data;
-
+	Node<T>* ptr = m_head;
+cout << "entering unique()" << endl;
 	if(m_head != NULL){
+	
+cout << "inside if" << endl;
 		data = m_head->m_data;
-	}
 
-	while(data != NULL) {
-
-		for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
-
-			if(data == next->m_link->m_data){
+		while(ptr != NULL) {
+cout << "inside while" << endl;
+			for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
+cout << "inside for ---" <<" ptr: "<< ptr << " data: " << data << " next: " << next << endl;
+				if(data == next->m_link->m_data && next != ptr){
 	
-				removeNode( next);
+					removeNode( next);
+				}
 			}
-		}
 	
-		data = data->m_link;
+			ptr = ptr->m_link;
+			data = ptr->m_data;
+		}
+	} else {
+	
+		cout << "Error: NULL list." << endl;
 	}
+
 }
 
 template <typename T>
@@ -150,11 +163,19 @@ void List<T>::removeDuplicates()
 {
 }
 
+/*
+	Takes the current list and copys it into a new list in reverse order.  This function
+	will use an interative solution to reverse the linked list.
+*/
 template <typename T>
 void List<T>::reverse()
 {
 }
 
+/*
+	Takes the current list and copys it into a new list in reverse order.  This function
+	will use an recursive solution to reverse the linked list.
+*/
 template <typename T>
 void List<T>::recursiveReverse()
 {
@@ -185,10 +206,10 @@ void List<T>:: mergeSort( List<T>& L2 )
 // LIST PRIVATE MEMBER FUNCTIONS
 
 /*
-	removeNode: This function is used to remove a single node from the list.  The arg ptr
+	This function is used to remove a single node from the list.  The arg ptr
 	will be the previous node from the target to remove. After removing the target node 
 	from the list, we will then delete it.
-	*/
+*/
 template <typename T>
 void List<T>::removeNode( Node<T>* ptr)
 {
