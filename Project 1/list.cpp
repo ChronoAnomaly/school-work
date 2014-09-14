@@ -57,9 +57,7 @@ List<T>::List( List& L )
 template <typename T>
 List<T>::~List()
 {
-	cout << "entering destructor" << endl;
 	releaseList();
-	cout << "exiting constructor" << endl;
 }
 
 template <typename T>
@@ -77,10 +75,17 @@ List<T>& List<T>::operator=( List& L )
 template <typename T>
 void List<T>::print( ostream& os ) const
 {
+	int count = 0;
 	os << "[";
 	for ( Node<T>* next = m_head; next != NULL; next = next->m_link )
 	{
 		os << next->m_data << (next->m_link == NULL ? "]" : ", ");
+		
+		if(count % 15 == 0 && count != 0){
+			cout << endl;
+		}
+		
+		count++;
 	}
 }
 
@@ -120,17 +125,24 @@ void List<T>::makeCycle( int K )
 template <typename T>
 void List<T>::unique()
 {
-    T data;
+	T data;
 
-    if(m_head != NULL){
-        data = m_head->m_data;
-    }
+	if(m_head != NULL){
+		data = m_head->m_data;
+	}
 
-    for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
+	while(data != NULL) {
 
-        if(data == next->m_link->m_data){
-        }
-    }
+		for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
+
+			if(data == next->m_link->m_data){
+	
+				removeNode( next);
+			}
+		}
+	
+		data = data->m_link;
+	}
 }
 
 template <typename T>
@@ -188,6 +200,8 @@ void List<T>::removeNode( Node<T>* ptr)
 		Node<T>* target = ptr->m_link;
 
 		ptr->m_link = target->m_link;
+
+		delete target;
 	}
 	
 }
