@@ -199,8 +199,36 @@ void List<T>::sort()
 }
 
 template <typename T>
-void List<T>:: mergeSort( List<T>& L2 )
+void List<T>::mergeSort( List<T>& L2 )
 {
+}
+
+
+template <typename T>
+void List<T>::addFront( T item)
+{
+	Node<T>* element = new Node<T>( item);
+
+	element->m_link = m_head;
+
+	m_head = element;
+
+}
+
+template <typename T>
+void List<T>::addBack( T item)
+{
+	Node<T>* element = new Node<T>( item);
+
+
+	for( Node<T>* next = m_head; next != NULL; next = next->m_link){
+		
+		if( next->m_link == NULL){
+			
+			next->m_link = element;
+		}
+	}
+
 }
 
 // LIST PRIVATE MEMBER FUNCTIONS

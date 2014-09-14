@@ -57,6 +57,8 @@ class List {
 		bool isSorted();
 		void sort();
 		void mergeSort( List<T>& );
+		void addFront( T );
+		void addBack( T );
 		
 	protected:
 		Node<T>*	m_head;
