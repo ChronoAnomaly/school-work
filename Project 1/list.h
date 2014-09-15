@@ -46,7 +46,9 @@ class List {
 		bool hasCycle();
 		/* Creates a cycle withen the list, linking the last node with the node
 		being passed */
-		void makeCycle( int );
+		Node<T>* makeCycle( int );
+		/* Removes the cycle within the list, allowing the list to be deleted */
+		void removeCycle( Node<T>* );
 		/* Makes the current list unique by removing any duplicates from the list */
 		void unique();
 		/* Removes any consecutive duplicate node in the current list */

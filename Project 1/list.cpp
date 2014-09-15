@@ -103,25 +103,33 @@ bool List<T>::hasCycle()
 
 */
 template <typename T>
-void List<T>::makeCycle( int K )
+Node<T>* List<T>::makeCycle( int K )
 {
-	Node<T>* next = m_head;
+
+	Node<T>* Kth = NULL;		// Pointer to node at position 1, 2, 3 ...
+	Node<T>* last = m_head;		// Pointer to last node
+	int cnt = 0;			// Node counter
 	
-	for(int i = 1; next != NULL && i < K; i++){
+	// Stop on the last node, if the list is not empty
+	while(last != NULL && last->m_link != NULL){
+	
+		// If cnt equals k, set the Kth pointer
+		if(++cnt == K){
+			Kth = last;
+		}
 		
-		next = next->m_link;
-	}
-	
-	Node<T>* ptr = next->m_link;
-
-	while(ptr != NULL && ptr->m_link != NULL){
-	
-		ptr = ptr->m_link;
+		last = last->m_link;
 	}
 
-	ptr->m_link = next;
+	last->m_link = Kth;		// Make the cycle
+	return last;			// Return the last node on the list before
 }
 
+template <typename T>
+void List<T>::removeCycle(Node<T>* last)
+{
+	last->m_link = NULL;
+}
 /*
 	Goes through the list checking a signle node against the rest of the list.  If
 	another node is found to have the same data as the current node, then that node
@@ -132,16 +140,36 @@ void List<T>::unique()
 {
 	T data;
 	Node<T>* ptr = m_head;
-cout << "entering unique()" << endl;
+
+	while(ptr != NULL && ptr->m_link != NULL){
+	
+		for(Node<T>* next = ptr; next != NULL && next->m_link != NULL; next = next->m_link){
+			T temp = next->m_link->m_data;
+			if(data == temp && next != ptr){
+				removeNode( next);
+			}
+		}
+	
+		ptr = ptr->m_link;
+		data = ptr->m_data;
+	}
+/*	cout << "entering unique()" << endl;
+
 	if(m_head != NULL){
 	
-cout << "inside if" << endl;
+
+	cout << "inside if" << endl;
+
 		data = m_head->m_data;
 
 		while(ptr != NULL) {
-cout << "inside while" << endl;
+
+	cout << "inside while" << endl;
+
 			for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
-cout << "inside for ---" <<" ptr: "<< ptr << " data: " << data << " next: " << next << endl;
+
+	cout << "inside for ---" <<" ptr: "<< ptr << " data: " << data << " next: " << next << endl;
+
 				if(data == next->m_link->m_data && next != ptr){
 	
 					removeNode( next);
@@ -155,6 +183,7 @@ cout << "inside for ---" <<" ptr: "<< ptr << " data: " << data << " next: " << n
 	
 		cout << "Error: NULL list." << endl;
 	}
+*/
 
 }
 
@@ -170,6 +199,7 @@ void List<T>::removeDuplicates()
 template <typename T>
 void List<T>::reverse()
 {
+
 }
 
 /*
@@ -190,6 +220,13 @@ T List<T>::getKth( int K )
 template <typename T>
 bool List<T>::isSorted()
 {
+	for(Node<T>* next = m_head; next != NULL; next = next->m_link){
+	
+		if(next->m_data < next->m_link->m_data){
+			return false;
+		}
+	}
+	
 	return true;
 }
 
@@ -241,6 +278,9 @@ void List<T>::addBack( T item)
 template <typename T>
 void List<T>::removeNode( Node<T>* ptr)
 {
+
+	cout << "entering removeNode()" << endl;
+
 	if(ptr == NULL || ptr->m_link == NULL) {
 	
 		cout << "Error: NULL node" << endl;
@@ -252,7 +292,7 @@ void List<T>::removeNode( Node<T>* ptr)
 
 		delete target;
 	}
-	
+	cout << "exiting removeNode()" << endl;
 }
 template <typename T>
 void List<T>::releaseList()
