@@ -31,7 +31,8 @@ int main()
 		L.recursiveReverse();
 
 		cout << "reversed again List: " << L << endl;
-		
+	
+		cout << boolalpha << "isSorted() = " << L.isSorted() << endl;	
 
 		cout << endl;
 	}

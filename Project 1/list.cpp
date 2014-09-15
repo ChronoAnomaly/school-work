@@ -138,20 +138,27 @@ void List<T>::removeCycle(Node<T>* last)
 template <typename T>
 void List<T>::unique()
 {
+	
 	T data;
-	Node<T>* ptr = m_head;
+	Node<T>* ptr = m_head;			// Pointer for going throught the list and checking
+									// against the other nodes for uniqueness.
 
 	while(ptr != NULL && ptr->m_link != NULL){
 	
-		for(Node<T>* next = ptr; next != NULL && next->m_link != NULL; next = next->m_link){
+		data = ptr->m_data;		// Set the data to the current node's data
+
+		/* Traverse the list and check if any of the nodes data is equal to the
+		current node.  If so, then we delete the node. */
+		for(Node<T>* next = ptr; next != NULL && next->m_link != NULL;
+			 next = next->m_link){
+		cout << "ptr: " << ptr << " data: " << ptr->m_data << " next: " << next << " data: " << next->m_data << endl;
 			T temp = next->m_link->m_data;
-			if(data == temp && next != ptr){
+			if(data == temp && next->m_link != ptr){
 				removeNode( next);
 			}
 		}
 	
 		ptr = ptr->m_link;
-		data = ptr->m_data;
 	}
 /*	cout << "entering unique()" << endl;
 
@@ -220,9 +227,12 @@ T List<T>::getKth( int K )
 template <typename T>
 bool List<T>::isSorted()
 {
-	for(Node<T>* next = m_head; next != NULL; next = next->m_link){
+
+	bool valid = false;
+
+	for(Node<T>* next = m_head; next != NULL && next->m_link != NULL; next = next->m_link){
 	
-		if(next->m_data < next->m_link->m_data){
+		if(next->m_data > next->m_link->m_data){
 			return false;
 		}
 	}

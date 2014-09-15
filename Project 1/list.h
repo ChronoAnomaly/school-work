@@ -45,7 +45,8 @@ class List {
 		/* Dectects if the list has a cycle */
 		bool hasCycle();
 		/* Creates a cycle withen the list, linking the last node with the node
-		being passed */
+		being passed. Returns a pointer to the the last node in the list before making
+		a cycle, this node will be used to remove the cycle later. */
 		Node<T>* makeCycle( int );
 		/* Removes the cycle within the list, allowing the list to be deleted */
 		void removeCycle( Node<T>* );
