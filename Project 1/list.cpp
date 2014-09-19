@@ -150,8 +150,8 @@ void List<T>::unique()
 		/* Traverse the list and check if any of the nodes data is equal to the
 		current node.  If so, then we delete the node. */
 		for(Node<T>* next = ptr; next != NULL && next->m_link != NULL;
-			 next = next->m_link){
-		cout << "ptr: " << ptr << " data: " << ptr->m_data << " next: " << next << " data: " << next->m_data << endl;
+			next = next->m_link){
+			
 			T temp = next->m_link->m_data;
 			if(data == temp && next->m_link != ptr){
 				removeNode( next);
@@ -160,40 +160,14 @@ void List<T>::unique()
 	
 		ptr = ptr->m_link;
 	}
-/*	cout << "entering unique()" << endl;
-
-	if(m_head != NULL){
-	
-
-	cout << "inside if" << endl;
-
-		data = m_head->m_data;
-
-		while(ptr != NULL) {
-
-	cout << "inside while" << endl;
-
-			for(Node<T>* next = m_head; next != NULL; next = next->m_link) {
-
-	cout << "inside for ---" <<" ptr: "<< ptr << " data: " << data << " next: " << next << endl;
-
-				if(data == next->m_link->m_data && next != ptr){
-	
-					removeNode( next);
-				}
-			}
-	
-			ptr = ptr->m_link;
-			data = ptr->m_data;
-		}
-	} else {
-	
-		cout << "Error: NULL list." << endl;
-	}
-*/
-
 }
 
+/*
+	Goes through the list and removes any consecutive duplicate nodes. Will cycle through each
+	node in the list and once it dectects a consecutive data value it will remove the node
+	from the list and check for another consecutive value. If none are found, then it will
+	resume traveling through the list.
+*/
 template <typename T>
 void List<T>::removeDuplicates()
 {
@@ -289,7 +263,6 @@ template <typename T>
 void List<T>::removeNode( Node<T>* ptr)
 {
 
-	cout << "entering removeNode()" << endl;
 
 	if(ptr == NULL || ptr->m_link == NULL) {
 	
@@ -302,7 +275,6 @@ void List<T>::removeNode( Node<T>* ptr)
 
 		delete target;
 	}
-	cout << "exiting removeNode()" << endl;
 }
 template <typename T>
 void List<T>::releaseList()
