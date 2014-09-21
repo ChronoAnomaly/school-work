@@ -98,20 +98,18 @@ int main()
 
 		cout << "Sorted List: " << L << endl;
 
-		
 
 		cout << endl;
 	}
 
 	// Test Fragment 5
 	{
-		cout << "test" << endl;	
 	
 		srand(time(NULL));
 	
 		int numItems;
 		numItems = rand() % 1000;
-cout << numItems << endl;
+		
 		int items[numItems];
 
 		for(int i = 0; i < numItems; i++){
@@ -141,6 +139,28 @@ cout << numItems << endl;
 
 		cout << "List: " << L << endl;
 
+
+		cout << endl;
+	}
+
+	// Test Fragment 7
+	{
+		
+		int numItems = 16;
+
+		int items[] = {2, 2, 2, 3, 2, 3, 4, 4, 5, 17, 8, 9, 17, 23, 23, 50};
+
+		List<int> L( numItems, items);
+
+		cout << "List: " << L << endl;
+	
+		L.unique();
+
+		cout << "List unique(): " << L << endl;
+
+		L.removeDuplicates();
+
+		cout << "List duplicates(): " << L << endl;
 
 		cout << endl;
 	}

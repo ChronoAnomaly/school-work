@@ -1,2 +1,16 @@
-Project 1 desgin
+Project 1 design
 
+removeDuplicates:
+  will be the same as unique expect when a different type of data is found, we will change the value of the data.
+  
+reverse:
+  Node<T>* ptr will go through the list
+  Node<T>* last = current head of the list. used to delete the values after we reverse the list
+  
+  while ptr is not null, make a new current head of the node ptr
+
+sort:
+  while the list is not sorted go through each node and look at the data
+  if the data of the current node is > than the next node, then swap the data of the 2 nodes
+  
+  

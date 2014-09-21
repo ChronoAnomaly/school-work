@@ -152,8 +152,7 @@ void List<T>::unique()
 		for(Node<T>* next = ptr; next != NULL && next->m_link != NULL;
 			next = next->m_link){
 			
-			T temp = next->m_link->m_data;
-			if(data == temp && next->m_link != ptr){
+			if(data == next->m_link->m_data){
 				removeNode( next);
 			}
 		}
@@ -171,6 +170,22 @@ void List<T>::unique()
 template <typename T>
 void List<T>::removeDuplicates()
 {
+
+	T data;
+	Node<T>* ptr = m_head;
+
+	while(ptr != NULL && ptr->m_link != NULL){
+	
+		data = ptr->m_data;
+		
+		for(Node<T>* next = ptr; next != NULL && data == next->m_link->m_data;
+			next = next->m_link;){
+
+			removeNode( next);
+		}
+	
+		ptr = ptr->m_link;
+	}
 }
 
 /*
