@@ -94,7 +94,29 @@ void List<T>::print( ostream& os ) const
 template <typename T>
 bool List<T>::hasCycle()
 {
-	return true;
+	if(m_head == NULL){
+		cout << "ERROR: NULL list for hasCycle()" << endl;
+	} else {
+	
+		Node<T>* slow = m_head;
+		Node<T>* fast = m_head->m_link;
+
+		while(fast != NULL && fast->m_link != NULL){
+
+			fast = fast->m_link;
+
+			if(fast == slow){
+				return true;
+			}
+			fast = fast->m_link;
+			
+			if(fast == slow){
+				return true;
+			}
+			slow = slow->m_link;
+		}
+		return false;
+	}
 }
 
 /*
@@ -193,9 +215,6 @@ void List<T>::removeDuplicates()
 template <typename T>
 void List<T>::reverse()
 {
-
-	int count = 0;
-	Node<T>* ptr = m_head;
 
 	
 }

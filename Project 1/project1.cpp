@@ -24,6 +24,18 @@ int main()
 
 		cout << "List: " << L << endl;
 
+		cout << "L.makeCycle(4)" << endl;
+
+		Node<int>* last = L.makeCycle(4);
+
+		cout << boolalpha << "has cycle: " << L.hasCycle() << endl;
+		
+		L.removeCycle(last);
+
+		cout << "after remove cycle: " << L << endl;
+
+		cout << boolalpha << "has cycle: " << L.hasCycle() << endl;
+
 		L.reverse();
 
 		cout << "reversed List: " << L << endl;
