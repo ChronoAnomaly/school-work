@@ -154,7 +154,7 @@ int main()
 
 		cout << "List: " << L << endl;
 	
-		L.unique();
+	//	L.unique();
 
 		cout << "List unique(): " << L << endl;
 

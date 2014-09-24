@@ -178,8 +178,8 @@ void List<T>::removeDuplicates()
 	
 		data = ptr->m_data;
 		
-		for(Node<T>* next = ptr; next != NULL && data == next->m_link->m_data;
-			next = next->m_link;){
+		for(Node<T>* next = ptr; next != NULL &&  next->m_link != NULL
+			&& data == next->m_link->m_data; next = next->m_link){
 
 			removeNode( next);
 		}
