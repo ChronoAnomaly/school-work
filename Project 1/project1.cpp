@@ -146,18 +146,15 @@ int main()
 	// Test Fragment 7
 	{
 		
-		int numItems = 16;
+		int numItems = 23;
 
-		int items[] = {2, 2, 2, 3, 2, 3, 4, 4, 5, 17, 8, 9, 17, 23, 23, 50};
+		int items[] = {2, 2, 2, 3, 3, 2, 3, 4, 4, 5, 17, 8, 9, 17, 23, 23, 23,
+				50, 50, 50, 50, 51, 60};
 
 		List<int> L( numItems, items);
 
 		cout << "List: " << L << endl;
 	
-	//	L.unique();
-
-		cout << "List unique(): " << L << endl;
-
 		L.removeDuplicates();
 
 		cout << "List duplicates(): " << L << endl;

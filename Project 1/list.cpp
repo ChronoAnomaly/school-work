@@ -177,13 +177,11 @@ void List<T>::removeDuplicates()
 	while(ptr != NULL && ptr->m_link != NULL){
 	
 		data = ptr->m_data;
-		
-		for(Node<T>* next = ptr; next != NULL &&  next->m_link != NULL
-			&& data == next->m_link->m_data; next = next->m_link){
 
-			removeNode( next);
+		while(ptr->m_link->m_data == data){
+		
+			removeNode( ptr);
 		}
-	
 		ptr = ptr->m_link;
 	}
 }
@@ -196,6 +194,10 @@ template <typename T>
 void List<T>::reverse()
 {
 
+	int count = 0;
+	Node<T>* ptr = m_head;
+
+	
 }
 
 /*
@@ -239,33 +241,6 @@ void List<T>::mergeSort( List<T>& L2 )
 {
 }
 
-
-template <typename T>
-void List<T>::addFront( T item)
-{
-	Node<T>* element = new Node<T>( item);
-
-	element->m_link = m_head;
-
-	m_head = element;
-
-}
-
-template <typename T>
-void List<T>::addBack( T item)
-{
-	Node<T>* element = new Node<T>( item);
-
-
-	for( Node<T>* next = m_head; next != NULL; next = next->m_link){
-		
-		if( next->m_link == NULL){
-			
-			next->m_link = element;
-		}
-	}
-
-}
 
 // LIST PRIVATE MEMBER FUNCTIONS
 
