@@ -312,6 +312,13 @@ void List<T>::copyList( List& L )
 	}
 }
 
+template <typename T>
+Node<T>* List<T>::recurse( Node<T>* ptr, Node<T>* previous)
+{
+
+
+}
+
 // FORCE TEMPLATE CREATION
 
 template class Node<int>;

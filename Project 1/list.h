@@ -70,6 +70,7 @@ class List {
 		void removeNode( Node<T>*);
 		void releaseList();
 		void copyList( List& );
+		Node<T>* recurse( Node<T>* current, Node<T>* previous);
 		
 };
 
