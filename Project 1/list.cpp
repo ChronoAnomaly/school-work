@@ -233,7 +233,7 @@ void List<T>::reverse()
 		previous = current;
 		current = temp;
 	}
-//	m_head = current;
+	m_head = previous;
 }
 
 /*

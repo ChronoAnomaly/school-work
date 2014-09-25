@@ -134,7 +134,14 @@ int main()
 			
 		cout << "List: " << L << endl;
 
+		L.sort();
 
+		cout << "Sorted list: " << L << endl;
+
+		L.removeDuplicates();
+
+		cout << "list after removeDuplicates(): " << L << endl;
+		
 
 		cout << endl;
 	}
