@@ -215,22 +215,36 @@ void List<T>::removeDuplicates()
 
 /*
 	Takes the current list and copys it into a new list in reverse order.  This function
-	will use an interative solution to reverse the linked list.
+	will use an interative solution to reverse the linked list. It will travel through
+	the list and reverse it in place.
 */
 template <typename T>
 void List<T>::reverse()
 {
 
-	
+	Node<T>* current = m_head;
+	Node<T>* temp;
+	Node<T>* previous = NULL;
+
+	while( current != NULL){
+
+		temp = current->m_link;
+		current->m_link = previous;
+		previous = current;
+		current = temp;
+	}
+//	m_head = current;
 }
 
 /*
 	Takes the current list and copys it into a new list in reverse order.  This function
-	will use an recursive solution to reverse the linked list.
+	will use an recursive solution to reverse the linked list. It will call the recurse
+	function to complete the in place reverse recursivly.
 */
 template <typename T>
 void List<T>::recursiveReverse()
 {
+	m_head = recurse( m_head, NULL);
 }
 
 template <typename T>
@@ -260,9 +274,42 @@ bool List<T>::isSorted()
 	return true;
 }
 
+/*
+	Function used to sort the current linked list. We will use a simple insertion sort
+	for the function. While the not list is not currently sorted, we will travel through
+	and check for out of placed values.
+*/
 template <typename T>
 void List<T>::sort()
 {
+
+	Node<T>* current = m_head;
+	T tempData;
+
+	if( current != NULL){
+
+		while( !isSorted()){
+
+			if( current->m_link != NULL && current->m_data > current->m_link->m_data){
+
+				tempData = current->m_data;
+				current->m_data = current->m_link->m_data;
+				current->m_link->m_data = tempData;
+			}
+			
+			if( current->m_link != NULL){
+				
+				current = current->m_link;
+			} else {
+		
+				current = m_head;
+			}
+		}
+
+	} else {
+
+		cout << "Error: tried to sort an empty list." << endl;
+	}
 }
 
 template <typename T>

@@ -120,7 +120,7 @@ int main()
 		srand(time(NULL));
 	
 		int numItems;
-		numItems = rand() % 1000;
+		numItems = rand() % 500;
 		
 		int items[numItems];
 
@@ -151,6 +151,13 @@ int main()
 
 		cout << "List: " << L << endl;
 
+		L.recursiveReverse();
+	
+		cout << "recursiveReverse(): " << L << endl;
+
+		L.reverse();
+
+		cout << "reverse(): " << L << endl;
 
 		cout << endl;
 	}
