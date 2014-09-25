@@ -248,6 +248,10 @@ void List<T>::recursiveReverse()
 	m_head = recurse( m_head, NULL);
 }
 
+/*
+	This function retrieves the element at the Kth index.  If K happens to be negative
+	then we look from the back of the list.
+*/
 template <typename T>
 T List<T>::getKth( int K )
 {
@@ -364,17 +368,47 @@ void List<T>::sort()
 	}
 }
 
+/*
+	This function is used to merge two linked lists together. It will put them 
+	together in a sorted way.
+*/
 template <typename T>
 void List<T>::mergeSort( List<T>& L2 )
 {
-
+	
+	
 	Node<T>* list1 = m_head;
 	Node<T>* list2 = L2.m_head;
 
+	while( list2 != NULL && list2->m_link != NULL) {
+
+		if(list1->m_data <= list2->m_data && list1->m_link != NULL) {
+
+			list1 = list1->m_link;
+			
+		} else if(list1->m_data > list2->m_data) {
+		
+			Node<T>* temp = new Node<T>( list2->m_data);
+
+			if(list1 == m_head) {
+				
+				temp->m_link = m_head;
+				m_head = temp;
+			} else {
+			
+				temp->m_link = list1;
+				
+			}
+
+			list2 = list2->m_link;
+		}
+	}
+	L2.releaseList();
 }
 
 
 // LIST PRIVATE MEMBER FUNCTIONS
+
 
 /*
 	This function is used to remove a single node from the list.  The arg ptr
@@ -398,6 +432,7 @@ void List<T>::removeNode( Node<T>* ptr)
 		delete target;
 	}
 }
+
 template <typename T>
 void List<T>::releaseList()
 {

@@ -54,11 +54,16 @@ class List {
 		void unique();
 		/* Removes any consecutive duplicate node in the current list */
 		void removeDuplicates();
+		/* Reverses the list current list in place */
 		void reverse();
 		void recursiveReverse();
+		/* Gets the data from the Kth node in the list: if it exits */
 		T getKth( int );
+		/* Checks if the current list is sorted */
 		bool isSorted();
+		/* Sorts the current list */
 		void sort();
+		/* Merges two lists together */
 		void mergeSort( List<T>& );
 		
 	protected:

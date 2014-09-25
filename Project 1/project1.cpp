@@ -1,7 +1,8 @@
 /*
   Brett Worley
   CS 3100 - 01
-  8/28/14 */
+  8/28/14
+*/
 
 #include <iostream>
 #include <iomanip>
@@ -68,6 +69,19 @@ int main()
 
 		cout << "List unique(): " << L << endl;
 	
+		int nextItems = 5;
+		int items2[] = {1, 4, 6, 8, 10};
+
+		List<int> L2( nextItems, items2);
+
+		cout << "List 2: " << L2 << endl;
+
+		L.mergeSort(L2);
+
+		cout << "List 1 merged with List 2: " << L << endl;
+
+		cout << "List 2: " << L2 << endl;
+
 		cout << endl;
 	}
 
@@ -88,8 +102,6 @@ int main()
 		L.sort();
 
 		cout << "Sorted List: " << L << endl;
-
-
 
 		cout << endl;
 	}
@@ -134,7 +146,6 @@ int main()
 		
 		List<int> L( numItems, items);
 		
-			
 		cout << "List: " << L << endl;
 
 		L.sort();
@@ -168,6 +179,10 @@ int main()
 		L.reverse();
 
 		cout << "reverse(): " << L << endl;
+
+		int item = L.getKth(7);
+
+		cout << "getKth(7) = " << item << endl;
 
 		cout << endl;
 	}
