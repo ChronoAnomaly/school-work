@@ -110,6 +110,9 @@ int main()
 
 		cout << "Sorted List: " << L << endl;
 
+		L.reverse();
+
+		cout << "reverse(): " << L << endl;
 
 		cout << endl;
 	}
@@ -184,6 +187,14 @@ int main()
 		L.removeDuplicates();
 
 		cout << "List duplicates(): " << L << endl;
+
+		int item = L.getKth(14);
+
+		cout << "getKth(14) = " << item << endl;
+
+		item = L.getKth(-3);
+
+		cout << "getKth(-3) = " << item << endl;
 
 		cout << endl;
 	}

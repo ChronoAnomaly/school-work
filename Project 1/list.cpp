@@ -233,6 +233,7 @@ void List<T>::reverse()
 		previous = current;
 		current = temp;
 	}
+
 	m_head = previous;
 }
 
@@ -250,7 +251,58 @@ void List<T>::recursiveReverse()
 template <typename T>
 T List<T>::getKth( int K )
 {
-	return 0;
+	int count = 1;
+	Node<T>* ptr = m_head;
+	Node<T>* element = NULL;
+
+	while(ptr != NULL && ptr->m_link != NULL) {
+
+		ptr = ptr->m_link;
+		count++;
+	}
+		
+	if( m_head == NULL) {
+		
+		cout << "Error: cannot search through a NULL list." << endl;
+		return 0;
+	} else if( K == 0) {
+		
+		cout << "Error: no such element with an index of 0" << endl;
+		return 0;
+	} else if( K > count) {
+
+		cout << "Error: K is larger than the current list." << endl;
+		return 0;
+	} else if( K > 0) {
+
+		int index = 1;
+
+		ptr = m_head;
+
+		while( index < K) {
+	
+			ptr = ptr->m_link;
+			index++;
+		}
+
+		element = ptr;
+	} else if( K < 0) {
+
+		int index = count;
+		ptr = m_head;
+
+		while( K + index != 0) {
+
+			ptr = ptr->m_link;
+
+			index--;
+		}
+
+		element = ptr;
+	}
+
+	return element->m_data;
+
 }
 
 /*
