@@ -70,6 +70,7 @@ class List {
 		void removeNode( Node<T>*);
 		void releaseList();
 		void copyList( List& );
+		/* Used by the recursiveReverse function to reverse the list in place */
 		Node<T>* recurse( Node<T>* current, Node<T>* previous);
 		
 };

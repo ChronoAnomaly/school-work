@@ -147,11 +147,16 @@ Node<T>* List<T>::makeCycle( int K )
 	return last;			// Return the last node on the list before
 }
 
+/* 
+	Used to remove the current cycle from the list. Node<T>* last is where the 
+	original end of the list was before a cycle was created
+*/
 template <typename T>
 void List<T>::removeCycle(Node<T>* last)
 {
 	last->m_link = NULL;
 }
+
 /*
 	Goes through the list checking a signle node against the rest of the list.  If
 	another node is found to have the same data as the current node, then that node
@@ -234,13 +239,18 @@ T List<T>::getKth( int K )
 	return 0;
 }
 
+/*
+	This function detects if the current list is sorted. It will travese the entire list
+	checking against each node to see if a previous node is greater than its next node.
+	If a previous node is greater, then it will return false.
+*/
 template <typename T>
 bool List<T>::isSorted()
 {
 
-	bool valid = false;
 
-	for(Node<T>* next = m_head; next != NULL && next->m_link != NULL; next = next->m_link){
+	for(Node<T>* next = m_head; next != NULL && next->m_link != NULL;
+		 next = next->m_link){
 	
 		if(next->m_data > next->m_link->m_data){
 			return false;
@@ -258,6 +268,10 @@ void List<T>::sort()
 template <typename T>
 void List<T>::mergeSort( List<T>& L2 )
 {
+
+	Node<T>* list1 = m_head;
+	Node<T>* list2 = L2.m_head;
+
 }
 
 
@@ -312,10 +326,26 @@ void List<T>::copyList( List& L )
 	}
 }
 
+/*
+	Main function for the recursiveReverse function. Used to travel through the list
+	and reverse the list in place
+*/
 template <typename T>
 Node<T>* List<T>::recurse( Node<T>* ptr, Node<T>* previous)
 {
 
+	Node<T>* temp;
+
+	if( ptr->m_link == NULL) {
+
+		ptr->m_link = previous;
+		return ptr;
+	} else {
+		
+		temp = recurse( ptr->m_link, ptr);
+		ptr->m_link = previous;
+		return temp;
+	}
 
 }
 
