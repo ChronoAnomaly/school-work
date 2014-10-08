@@ -7,7 +7,14 @@ using namespace std;
 // class node member functions
 //
 node::node( void )
-{ cout << "node" << endl; return; }
+{
+	cout << "node" << endl;
+
+	flink = this;
+	blink = this;
+
+	return;
+}
 
 node::~node(void)
 { cout << "~node" << endl; return; }
@@ -28,7 +35,7 @@ node*	node::remove( void )
 //
 // class treeNode member functions
 //
-treeNode::treeNode( int d )
+treeNode::treeNode( int d ) 
 {
 	data = d;
 	leftTree = NULL;
@@ -45,7 +52,7 @@ treeNode::~treeNode(void)
 //
 // class braidedNode member functions
 //
-braidedNode::braidedNode( int d ) : treeNode(d)
+braidedNode::braidedNode( int d ) : treeNode(d), node()
 {
 	
 	cout << "braidedNode" << endl;
@@ -105,7 +112,13 @@ int braidedTree::prev()
 	}
 }
 int braidedTree::value()
-{ cout << "value" << endl; return 0; }
+{
+	cout << "value" << endl;
+	
+	cout << view->data << endl;
+
+	return 0;
+}
 
 void braidedTree::display()		
 { cout << "display" << endl; return; }

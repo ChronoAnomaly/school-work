@@ -34,7 +34,10 @@ class braidedNode : public node, public treeNode
 		braidedNode( int );			// construct a braided node with a data value
 		braidedNode* leftChild(void);	// return pointer to left subtree
 		braidedNode* rightChild(void);	// return pointer to right subtree
-		braidedNode* next(void);		// return a pointer to the successor braidedNode
+		braidedNode* next(void){ return
+dynamic_cast<braidedNode*> (node::next());}
+		// return a pointer to
+the successor braidedNode
 		braidedNode* prev(void);		// return a pointer to the previous braidedNode
 	friend class braidedTree;
 };
