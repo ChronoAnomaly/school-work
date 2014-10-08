@@ -59,18 +59,38 @@ braidedNode* braidedNode::prev(void)
 //
 braidedTree::braidedTree(void)
 { 
-root = new braidedNode(10);
-cout << "braidedTree" << endl; return; }
+	root = new braidedNode(-1);
+	view = root;
+
+	cout << "braidedTree" << endl; 
+}
 
 braidedTree::~braidedTree(void)			
 { cout << "~braidedTree" << endl; return; }
 
 int braidedTree::next()	
-{ cout << "next" << endl; return 0; }
+{
+	cout << "next" << endl;
+	
+	if( view == root) {
+		cout << "The tree is currently empty" << endl;
+	} else {
+
+		
+	}
+}
 
 int braidedTree::prev()	
-{ cout << "prev" << endl; return 0; }
+{
+	cout << "prev" << endl;
 
+	if( view == root) {
+		cout << "The tree is currently empty" << endl;
+	} else {
+
+		
+	}
+}
 int braidedTree::value()
 { cout << "value" << endl; return 0; }
 

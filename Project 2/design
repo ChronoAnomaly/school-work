@@ -1,0 +1,8 @@
+ 
+braided tree::
+
+next() and prev()
+  Check if the view node is currently the root: if so, then return syaing that
+the current tree is empty. If the tree is not empty, then convert the braided
+node into a node and then use the node's class next or prev function.
+
