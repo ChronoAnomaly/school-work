@@ -29,7 +29,14 @@ node*	node::remove( void )
 // class treeNode member functions
 //
 treeNode::treeNode( int d )
-{ cout << "treeNode" << endl; return; }
+{
+	data = d;
+	leftTree = NULL;
+	rightTree = NULL;
+
+	cout << "treeNode" << endl;
+	return;
+}
 
 treeNode::~treeNode(void)
 { cout << "~treeNode" << endl; return; }
@@ -39,7 +46,11 @@ treeNode::~treeNode(void)
 // class braidedNode member functions
 //
 braidedNode::braidedNode( int d ) : treeNode(d)
-{ cout << "braidedNode" << endl; return; }
+{
+	
+	cout << "braidedNode" << endl;
+	return;
+}
 
 braidedNode* braidedNode::leftChild(void)
 { cout << "leftChild" << endl; return NULL; }
@@ -61,6 +72,8 @@ braidedTree::braidedTree(void)
 { 
 	root = new braidedNode(-1);
 	view = root;
+	root->flink = root;
+	root->blink = root;
 
 	cout << "braidedTree" << endl; 
 }

@@ -43,7 +43,29 @@ value of the node
 boolean insert( int x)
   If the tree is empty: create a new node with the value and set to the right
 child of the root and update view to the new node
-  Else: 
+  Else: travel through the tree until we reach the spot the value should be, if
+the value exists already, then we return false. If not, then we create a new
+node with the value and place it into the tree and update the view node to the
+new node.
+
+boolean remove( int x)
+  Need to find out how to remove a node from a tree
+  
+int removeMin()
+  If not empty then: 
+  int temp = root->next->data
+  de-link the node by braidedNode target = root->next: if view == target move
+it to target->next 
+  set root->next = target->next , then delete target
+  Else: print error stating the tree is empty
+  
+int removeMax()
+  If not empty then:
+  int temp = root->prev->data
+  de-link the node by braidedNode target = root->prev: if view == target move
+it to target->prev
+  set root->prev = target->next, then delete target
+  Else: print error stating the tree is empty
 
 Commands
 
