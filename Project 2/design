@@ -1,8 +1,65 @@
  
 braided tree::
 
-next() and prev()
-  Check if the view node is currently the root: if so, then return syaing that
+int next() and int prev()
+  Check if the view node is currently the root: if so, then return saying that
 the current tree is empty. If the tree is not empty, then convert the braided
 node into a node and then use the node's class next or prev function.
 
+int value()
+  returns the value at the current node view is on.
+
+void display()
+  Start at the root node and traverse the linked nodes from smallest to
+largest, printing each value until we reach the root node again.
+
+boolean isFirst()
+  Check if the view is on the root node or if it is on root->next, if not, then
+return false.
+
+boolean isLast()
+  Check if the view is on the root node or if it is on root->prev, if not, then
+return false.
+
+boolean isHead()
+  return view == root
+  
+boolean isEmpty()
+  return root->rightChild == NULL
+
+boolean find( int x)
+  Travel down the tree looking for the value x. If the value is ever found, then
+set found to true and set the view node to where x was found. If not, then leave
+as false and set the view node to the root node.
+
+int findMin()
+  If not empty go to root->next and set the view to the node, also return the
+value of the node
+
+int findMax()
+  If not empty go to root->prev and set the view to the node, also return the
+value of the node
+
+boolean insert( int x)
+  If the tree is empty: create a new node with the value and set to the right
+child of the root and update view to the new node
+  Else: 
+
+Commands
+
+N: call the next function
+P: call the prev function
+V: call the value function and place into a variable
+D: call the display function
+F: call the isFirst function
+L: call the isLast function
+H: call the isHead function
+E: call the isEmpty function
+S: call the find function
+<: call the findMax function
+>: call the findMin function
++: call the insert function
+-: call the remove function
+M: call the removeMin function
+X: call the removeMax function
+Q: exits the command loop
