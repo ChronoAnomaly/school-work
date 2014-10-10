@@ -6,24 +6,7 @@ using namespace std;
 //
 // class node member functions
 //
-node::node( void )
-{
-	cout << "node" << endl;
 
-	flink = this;
-	blink = this;
-
-	return;
-}
-
-node::~node(void)
-{ cout << "~node" << endl; return; }
-
-node*	node::next( void )
-{ cout << "next" << endl; return NULL; }
-		
-node* 	node::prev( void )
-{ cout << "prev" << endl; return NULL; }
 
 node*	node::insert( node* )
 { cout << "insert" << endl; return NULL; }
@@ -35,15 +18,6 @@ node*	node::remove( void )
 //
 // class treeNode member functions
 //
-treeNode::treeNode( int d ) 
-{
-	data = d;
-	leftTree = NULL;
-	rightTree = NULL;
-
-	cout << "treeNode" << endl;
-	return;
-}
 
 treeNode::~treeNode(void)
 { cout << "~treeNode" << endl; return; }
@@ -52,24 +26,8 @@ treeNode::~treeNode(void)
 //
 // class braidedNode member functions
 //
-braidedNode::braidedNode( int d ) : treeNode(d), node()
-{
-	
-	cout << "braidedNode" << endl;
-	return;
-}
 
-braidedNode* braidedNode::leftChild(void)
-{ cout << "leftChild" << endl; return NULL; }
 
-braidedNode* braidedNode::rightChild(void)
-{ cout << "rightChild" << endl; return NULL; }
-
-braidedNode* braidedNode::next(void)
-{ cout << "next" << endl; return NULL; }
-
-braidedNode* braidedNode::prev(void)
-{ cout << "prev" << endl; return NULL; }
 
 
 //
@@ -96,7 +54,7 @@ int braidedTree::next()
 		cout << "The tree is currently empty" << endl;
 	} else {
 
-		
+		view = view->next();	
 	}
 }
 
@@ -108,7 +66,7 @@ int braidedTree::prev()
 		cout << "The tree is currently empty" << endl;
 	} else {
 
-		
+		view = view->prev();
 	}
 }
 int braidedTree::value()
