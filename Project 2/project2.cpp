@@ -85,7 +85,11 @@ int main()
 
 			bt.removeMax();
 
-		} 
+		} else if(cmd != 'Q') {
+
+			cout << "Error: " << cmd << " is not a valid command" << endl;
+
+		}
 	}
 	while( cmd != 'Q');
 }

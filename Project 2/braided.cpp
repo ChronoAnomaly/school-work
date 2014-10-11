@@ -33,18 +33,6 @@ treeNode::~treeNode(void)
 //
 // class braidedTree member functions
 //
-braidedTree::braidedTree(void)
-{ 
-	root = new braidedNode(-1);
-	view = root;
-	root->flink = root;
-	root->blink = root;
-
-	cout << "braidedTree" << endl; 
-}
-
-braidedTree::~braidedTree(void)			
-{ cout << "~braidedTree" << endl; return; }
 
 int braidedTree::next()	
 {
@@ -113,3 +101,20 @@ int braidedTree::removeMin(void)
 
 int braidedTree::removeMax(void)
 { cout << "removeMax" << endl; return 0; }
+
+/*
+	This function is used by ~braidedTree to delete the whole tree. It will
+	traverse the tree in post order form and delete the nodes recursively.
+*/
+void braidedTree::releaseTree(braidedNode* ptr)
+{
+
+	cout << ptr << endl;
+	if( ptr != NULL) {
+		
+		releaseTree( dynamic_cast<braidedNode*> (ptr->leftTree));
+		releaseTree( dynamic_cast<braidedNode*> (ptr->rightTree));
+		delete ptr;
+
+	}
+}

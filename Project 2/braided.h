@@ -63,9 +63,17 @@ class braidedNode : public node, public treeNode
 class braidedTree
 {
 	public:
-		braidedTree(void);
-		~braidedTree(void);			
-
+		braidedTree(void)
+		{
+			root = new braidedNode(-1);
+			root->flink = root;
+			root->blink = root;
+			view = root;
+			
+			std::cout << "braidedTree" << std::endl;
+		}
+		~braidedTree(void)
+		{ std::cout << root << std::endl; releaseTree(root); }
 		int next();	
 		int prev();	
 		int value();
@@ -89,8 +97,9 @@ class braidedTree
 		int removeMax(void);			
 
 	private:
-		braidedNode*	root;
+		braidedNode*	root;	
 		braidedNode*	view;	
+		void releaseTree(braidedNode*);
 };
 
 #endif
