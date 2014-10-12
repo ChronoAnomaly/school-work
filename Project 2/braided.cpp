@@ -79,16 +79,23 @@ bool braidedTree::isFirst()
 {
 	cout << "isFirst" << endl;
 
-	return (!isEmpty && (view == root->flink));
+	return (!isEmpty() && (view == root->flink));
 }
 
+/*
+	Returns true if the list is not empty and view is currently on the largest
+	value.
+*/
 bool braidedTree::isLast()		
 {
 	cout << "isLast" << endl;
 
-	return (!isEmpty && (view == root->blink));
+	return (!isEmpty() && (view == root->blink));
 }
 
+/*
+	Checks if the view node is currently on the root node.
+*/
 bool braidedTree::isHead()
 {
 	cout << "isHead" << endl;
@@ -96,9 +103,13 @@ bool braidedTree::isHead()
 	return (view == root);
 }
 
+/*
+	Checks if the right child of the root is empty. If so, then the tree is empty, else
+	the tree has nodes in it.
+*/
 bool braidedTree::isEmpty()	
 {
-	cout << "isEmpty" << endl
+	cout << "isEmpty" << endl;
 	
 	return root->rightTree == NULL;
 }
@@ -110,18 +121,44 @@ bool braidedTree::find( int )
 	return false;
 }
 
+/*
+	Sets the view node to the smallest value and returns the value if the tree
+	contains nodes.
+*/
 int braidedTree::findMin( void )		
 {
 	cout << "findMin" << endl;
 
-	return 0;
+	if( !isEmpty()) {
+	
+		view = dynamic_cast<braidedNode*> (root->flink);
+
+		return view->data;
+	} else {
+
+		cout << "The tree is currently empty" << endl;
+		return 0;
+	}
 }
 
+/*
+	Sets the view node to the largest value and returns the value if the tree
+	contains nodes.
+*/
 int braidedTree::findMax( void )
 {
 	cout << "findMax" << endl;
 
-	return 0;
+	if( !isEmpty()) {
+
+		view = dynamic_cast<braidedNode*> (root->blink);
+
+		return view->data;
+	} else {
+
+		cout << "The tree is currently empty" << endl;
+		return 0;
+	}
 }
 
 bool braidedTree::insert( int )		
@@ -138,11 +175,49 @@ bool braidedTree::remove( int )
 	return false;
 }
 
-int braidedTree::removeMin(void)			
-{ cout << "removeMin" << endl; return 0; }
+int braidedTree::removeMin(void)
+{
+	cout << "removeMin" << endl;
+	
+	if( !isEmpty()) {
+
+		if( view == root->flink) {
+			view = root;
+		}
+
+		braidedNode* ptr = dynamic_cast<braidedNode*> (root->flink);
+		root->flink = ptr->flink;
+		delete ptr;
+		
+	} else {
+
+		cout << "The tree is currently empty" << endl;
+	}
+
+	return 0;
+}
 
 int braidedTree::removeMax(void)
-{ cout << "removeMax" << endl; return 0; }
+{
+	cout << "removeMax" << endl;
+	
+	if( !isEmpty()) {
+
+		if( view == root->blink) {
+			view = root;
+		}
+
+		braidedNode* ptr = dynamic_cast<braidedNode*> (root->blink);
+		root->blink = ptr->blink;
+		delete ptr;
+
+	} else {
+
+		cout << "The tree is currently empty" << endl;
+	}
+
+	return 0;
+}
 
 /*
 	This function is used by ~braidedTree to delete the whole tree. It will
