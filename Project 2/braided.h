@@ -66,8 +66,6 @@ class braidedTree
 		braidedTree(void)
 		{
 			root = new braidedNode(-1);
-			root->flink = root;
-			root->blink = root;
 			view = root;
 			
 			std::cout << "braidedTree" << std::endl;

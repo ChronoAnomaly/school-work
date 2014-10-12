@@ -61,40 +61,82 @@ int braidedTree::value()
 {
 	cout << "value" << endl;
 	
-	cout << view->data << endl;
+	return view->data;
+}
+
+void braidedTree::display()		
+{
+	cout << "display" << endl;
+
+	return;
+}
+
+/*
+	Returns true if the list is not empty and view is currently on the smallest
+	value.
+*/
+bool braidedTree::isFirst()		
+{
+	cout << "isFirst" << endl;
+
+	return (!isEmpty && (view == root->flink));
+}
+
+bool braidedTree::isLast()		
+{
+	cout << "isLast" << endl;
+
+	return (!isEmpty && (view == root->blink));
+}
+
+bool braidedTree::isHead()
+{
+	cout << "isHead" << endl;
+
+	return (view == root);
+}
+
+bool braidedTree::isEmpty()	
+{
+	cout << "isEmpty" << endl
+	
+	return root->rightTree == NULL;
+}
+
+bool braidedTree::find( int )
+{
+	cout << "find" << endl;
+	
+	return false;
+}
+
+int braidedTree::findMin( void )		
+{
+	cout << "findMin" << endl;
 
 	return 0;
 }
 
-void braidedTree::display()		
-{ cout << "display" << endl; return; }
-
-bool braidedTree::isFirst()		
-{ cout << "isFirst" << endl; return false; }
-
-bool braidedTree::isLast()		
-{ cout << "isLast" << endl; return false; }
-
-bool braidedTree::isHead()
-{ cout << "isHead" << endl; return false; }
-
-bool braidedTree::isEmpty()	
-{ cout << "isEmpty" << endl; return false; }
-
-bool braidedTree::find( int )
-{ cout << "find" << endl; return false; }
-
-int braidedTree::findMin( void )		
-{ cout << "findMin" << endl; return 0; }
-
 int braidedTree::findMax( void )
-{ cout << "findMax" << endl; return 0; }
+{
+	cout << "findMax" << endl;
+
+	return 0;
+}
 
 bool braidedTree::insert( int )		
-{ cout << "insert" << endl; return false; }
+{
+	cout << "insert" << endl;
+
+	return false;
+}
 
 bool braidedTree::remove( int )			
-{ cout << "remove" << endl; return false; }
+{
+	cout << "remove" << endl;
+
+	return false;
+}
 
 int braidedTree::removeMin(void)			
 { cout << "removeMin" << endl; return 0; }
