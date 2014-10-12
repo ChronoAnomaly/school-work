@@ -27,7 +27,7 @@ int main()
 
 		} else if(cmd == 'V') {
 
-			bt.value();
+			cout << "View's current value is : " << bt.value() << endl;;
 
 		} else if(cmd == 'D') {
 
@@ -35,19 +35,43 @@ int main()
 
 		} else if(cmd == 'F') {
 
-			bt.isFirst();
+			if( bt.isFirst()) {
+			
+				cout << "View is currently on the smallest node" << endl;
+			} else {
+			
+				cout << "View is not on the smallest node" << endl;
+			}
 
 		} else if(cmd == 'L') {
 
-			bt.isLast();
+			if( bt.isLast()) {
+			
+				cout << "View is currently on the largest node" << endl;
+			} else {
+
+				cout << "View is not on the largest node" << endl;
+			}
 
 		} else if(cmd == 'H') {
 
-			bt.isHead();
+			if( bt.isHead()) {
+			
+				cout << "View is the on the root node" << endl;
+			} else {
+	
+				cout << "View is not on the root node" << endl;
+			}
 
 		} else if(cmd == 'E') {
 
-			bt.isEmpty();
+			if( bt.isEmpty()) {
+
+				cout << "The tree is empty" << endl;
+			} else {
+
+				cout << "The tree is not empty" << endl;
+			}
 
 		} else if(cmd == 'S') {
 
@@ -58,11 +82,11 @@ int main()
 
 		} else if(cmd == '<') {
 
-			bt.findMin();
+			cout << "The smallest value is: " << bt.findMin() << endl;
 
 		} else if(cmd == '>') {
 
-			bt.findMax();
+			cout << "The largest value is: " << bt.findMax() << endl;
 
 		} else if(cmd == '+') {
 
@@ -79,11 +103,13 @@ int main()
 
 		} else if(cmd == 'M') {
 
-			bt.removeMin();
+			cout << boolalpha << "removeMin() successful: " 
+			<< bt.removeMin() << endl;
 
 		} else if(cmd == 'X') {
 
-			bt.removeMax();
+			cout MM boolalpha << "removeMax() successful: "
+			 << bt.removeMax() << endl;
 
 		} else if(cmd != 'Q') {
 

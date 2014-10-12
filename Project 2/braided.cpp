@@ -42,7 +42,8 @@ int braidedTree::next()
 		cout << "The tree is currently empty" << endl;
 	} else {
 
-		view = view->next();	
+		view = view->next();
+		return view->data;	
 	}
 }
 
@@ -55,6 +56,7 @@ int braidedTree::prev()
 	} else {
 
 		view = view->prev();
+		return view->data;
 	}
 }
 int braidedTree::value()
@@ -68,6 +70,16 @@ void braidedTree::display()
 {
 	cout << "display" << endl;
 
+	cout << "[";
+
+	braidedNode* ptr = dynamic_cast<braidedNode*> (root->flink);
+	
+	while(ptr != root) {
+
+		cout << " " << ptr->data << (ptr->next != root) ? "," : "]";
+	}
+
+	cout << endl;
 	return;
 }
 
