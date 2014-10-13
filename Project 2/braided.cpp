@@ -398,7 +398,23 @@ bool braidedTree::remove( int value)
 
 			} else {
 
-				parent = parent->leftChild();
+				if( doomed->leftTree != NULL) {
+			
+					braidedNode* left = doomed->leftChild();
+					left->flink = parent;
+					parent->leftTree = left;
+					//parent->leftTree = doomed->leftChild();
+					//parent->leftTree->flink = parent;
+					delete doomed;
+				} else {
+
+					braidedNode* right = doomed->rightChild();
+					right->blink = parent;
+					parent->rightTree = right;
+					//parent->rightTree = doomed->rightChild();
+					//parent->rightTree->blink = parent;
+					delete doomed;
+				}
 			}
 		} else {
 
@@ -411,8 +427,24 @@ bool braidedTree::remove( int value)
 				delete doomed;
 
 			} else {
-		
-				parent = parent->rightChild();
+	
+				if( doomed->leftTree != NULL) {
+
+					braidedNode* left = doomed->leftChild();
+					left->flink = parent;
+					parent->leftTree = left;
+					//parent->leftTree = doomed->leftChild();
+					//parent->leftTree->flink = parent;
+					delete doomed;
+				} else {
+
+					braidedNode* right = doomed->rightChild();
+					right->blink = parent;
+					parent->rightTree = right;
+					//parent->rightTree = doomed->rightChild();
+					//parent->rightTree->blink = parent;
+					delete doomed;
+				}
 			}
 			
 		}
