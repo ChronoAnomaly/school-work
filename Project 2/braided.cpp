@@ -198,11 +198,44 @@ int braidedTree::findMax( void )
 	}
 }
 
-bool braidedTree::insert( int )		
+bool braidedTree::insert( int value)		
 {
 	cout << "insert" << endl;
 
-	return false;
+	/* If the tree is empty, then we create a new head node under the header root node
+	and set its links to the root node. */
+	if( isEmpty()) {
+
+		braidedNode* ptr = dynamic_cast<braidedNode*> (root->rightTree);
+		ptr = new braidedNode( value);
+		ptr->flink = root;
+		ptr->blink = root;
+		root->flink = ptr;
+		root->blink = ptr;
+
+		view = ptr;
+		return true;
+	} else {
+
+		bool duplicate = false;
+		searchTree( dynamic_cast<braidedNode*> (root->rightTree), value, duplicate);
+
+		if( duplicate) {
+			return false;
+		} else {
+
+
+		}
+	}
+}
+
+braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
+{
+
+	if( ptr->leftTree->data == value || ptr->rightTree->data == value) {
+
+		return ptr;
+	}
 }
 
 bool braidedTree::remove( int )			

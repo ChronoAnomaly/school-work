@@ -98,6 +98,7 @@ class braidedTree
 	private:
 		braidedNode*	root;	
 		braidedNode*	view;	
+		braidedNode* findParent(braidedNode*, int value);
 		void searchTree( braidedNode*, int value, bool& found);
 		void releaseTree( braidedNode*);
 };
