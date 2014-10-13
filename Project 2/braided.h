@@ -101,7 +101,6 @@ class braidedTree
 		braidedNode* findParent( braidedNode*, int value);
 		bool isLeaf( braidedNode*);
 		braidedNode* findPos( braidedNode*, int value);
-		bool checkLinks( braidedNode*);
 		bool isLeftmostNode( braidedNode* ptr, braidedNode* target);
 		bool isRightmostNode( braidedNode* ptr, braidedNode* target);
 		void searchTree( braidedNode*, int value, bool& found);

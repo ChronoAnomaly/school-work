@@ -9,8 +9,8 @@ using namespace std;
 
 
 node*	node::insert( node* )
-{
- cout << "insert" << endl; return NULL; }
+{ cout << "insert" << endl; return NULL; }
+
 
 node*	node::remove( void )
 { cout << "remove" << endl; return NULL; }
@@ -37,7 +37,7 @@ int braidedTree::next()
 {
 	cout << "next" << endl;
 	
-	if( !isEmpty()) {
+	if( isEmpty()) {
 		cout << "The tree is currently empty" << endl;
 	} else {
 
@@ -50,7 +50,7 @@ int braidedTree::prev()
 {
 	cout << "prev" << endl;
 
-	if( !isEmpty()) {
+	if( isEmpty()) {
 		cout << "The tree is currently empty" << endl;
 	} else {
 
@@ -214,6 +214,7 @@ bool braidedTree::insert( int value)
 		root->flink = ptr;
 		root->blink = ptr;
 
+		root->rightTree = ptr;
 		view = ptr;
 		return true;
 	} else {
@@ -229,18 +230,26 @@ bool braidedTree::insert( int value)
 			braidedNode* ptr =  findPos( root->rightChild(), value);
 			if( value < ptr->data) {
 			
+				ptr->leftTree = new braidedNode( value);
 				braidedNode* target = ptr->leftChild();
-				target = new braidedNode( value);
-				checkLinks( target);
-
+				target->flink = ptr;
+				target->blink = ptr->prev();
+				ptr->blink->flink = target;
+				ptr->blink = target;
+				
+				ptr->leftTree = target;
 				view = target;
 
 			} else {
 
+				ptr->rightTree = new braidedNode( value);
 				braidedNode* target = ptr->rightChild();
-				target = new braidedNode( value);
-				checkLinks( target);
+				target->flink = ptr->next();
+				target->blink = ptr;
+				ptr->flink->blink = target
+				ptr->flink = target;
 	
+				ptr->rightTree = target;
 				view = target;
 			}
 			
@@ -249,38 +258,7 @@ bool braidedTree::insert( int value)
 	}
 }
 
-/*
-	This function is used to ensure that the prev and next links for a node are
-	set up right. It will travel the tree to see where the node exists in the tree
-	and set up links accordingly.
-*/
-bool braidedTree::checkLinks( braidedNode* target)
-{
 
-	braidedNode* parent = findParent( root->rightChild(), target->data);
-
-	if( isLeftmostNode( root->rightChild(), target)) {
-
-		target->blink = root;
-		target->flink = parent;
-		parent->blink = target;
-	} else if( isLeftmostNode( root->rightChild()->rightChild(), target)) {
-
-		target->blink = root->rightChild();
-		target->flink = parent;
-		parent->blink = target;
-	} else if( isRightmostNode( root->rightChild(), target)) {
-
-		target->flink = root;
-		target->blink = parent;
-		parent->flink = target;
-	} else if( isRightmostNode( root->rightChild()->leftChild(), target)) {
-
-		target->flink = root->rightChild();
-		target->blink = parent;
-		parent->flink = target;
-	}
-}
 
 /*
 	This function is used to find the current position of node with the data: value.
