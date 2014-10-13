@@ -71,7 +71,7 @@ void braidedTree::display()
 
 	cout << "[";
 
-	braidedNode* ptr = dynamic_cast<braidedNode*> (root->flink);
+	braidedNode* ptr = root->next();
 	
 	while(ptr != root) {
 
@@ -135,7 +135,7 @@ bool braidedTree::find( int value)
 	
 	bool found = false;
 
-	searchTree( dynamic_cast<braidedNode*> (root->rightTree), value, found);
+	searchTree( root->rightChild(), value, found);
 	
 	return found;
 }
@@ -153,8 +153,8 @@ void braidedTree::searchTree( braidedNode* ptr, int value, bool& found)
 			found = true;
 			view = ptr;
 		}
-		searchTree( dynamic_cast<braidedNode*> (ptr->leftTree), value, found);
-		searchTree( dynamic_cast<braidedNode*> (ptr->rightTree), value, found);
+		searchTree( ptr->leftChild(), value, found);
+		searchTree( ptr->rightChild(), value, found);
 	}
 }
 
@@ -168,7 +168,7 @@ int braidedTree::findMin( void )
 
 	if( !isEmpty()) {
 	
-		view = dynamic_cast<braidedNode*> (root->flink);
+		view = root->next();
 
 		return view->data;
 	} else {
@@ -188,7 +188,7 @@ int braidedTree::findMax( void )
 
 	if( !isEmpty()) {
 
-		view = dynamic_cast<braidedNode*> (root->blink);
+		view = root->prev();
 
 		return view->data;
 	} else {
@@ -206,7 +206,7 @@ bool braidedTree::insert( int value)
 	and set its links to the root node. */
 	if( isEmpty()) {
 
-		braidedNode* ptr = dynamic_cast<braidedNode*> (root->rightTree);
+		braidedNode* ptr = root->rightChild();
 		ptr = new braidedNode( value);
 		ptr->flink = root;
 		ptr->blink = root;
@@ -218,15 +218,31 @@ bool braidedTree::insert( int value)
 	} else {
 
 		bool duplicate = false;
-		searchTree( dynamic_cast<braidedNode*> (root->rightTree), value, duplicate);
+		searchTree( root->rightChild(), value, duplicate);
 
 		if( duplicate) {
 			return false;
 		} else {
 
 
+			braidedNode* ptr =  findPos( root->rightChild(), value);
+			
+			
 		}
 	}
+}
+
+braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
+{
+
+	if( value > ptr->data) {
+
+		findPos( ptr->rightChild(), value);
+	} else {
+
+		findPos( ptr->leftChild(), value);
+	}
+	return ptr;
 }
 
 braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
@@ -235,6 +251,52 @@ braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
 	if( ptr->leftTree->data == value || ptr->rightTree->data == value) {
 
 		return ptr;
+	}
+	findParent( ptr->leftChild(), value);
+	findParent( ptr->rightChild(), value);
+	return NULL;
+}
+
+/*
+	This function is used to find out if our target node if the right most node in the tree.
+	This will be used after inserting a node into the tree to find out if we need to
+	link the node to the root of the tree or the header node.
+*/
+bool braidedTree::isLeftmostNode( braidedNode* ptr, braidedNode* target)
+{
+
+	while( ptr->leftTree != NULL) {
+	
+		ptr = ptr->leftChild();
+	}
+
+	if( target == ptr) {
+	
+		return true;
+	} else {
+	
+		return false;
+	}
+}
+
+/*
+	This function is used to find out if our target node if the left most node in the tree.
+	This will be used after inserting a node into the tree to find out if we need to
+	link the node to the root of the tree or the header node.
+*/
+bool braidedTree::isRightmostNode( braidedNode* ptr, braidedNode* target)
+{
+
+	while( ptr->rightTree != NULL) {
+		ptr = ptr->rightChild();
+	}
+	
+	if( target == ptr) {
+
+		return true;
+	} else {
+	
+		return false;
 	}
 }
 
@@ -251,12 +313,12 @@ int braidedTree::removeMin(void)
 	
 	if( !isEmpty()) {
 
-		if( view == root->flink) {
+		if( view == root->next()) {
 			view = root;
 		}
 
-		braidedNode* ptr = dynamic_cast<braidedNode*> (root->flink);
-		root->flink = ptr->flink;
+		braidedNode* ptr = root->next();
+		root->flink = ptr->flink;	// manually set the links for the header node
 		delete ptr;
 		
 	} else {
@@ -273,12 +335,12 @@ int braidedTree::removeMax(void)
 	
 	if( !isEmpty()) {
 
-		if( view == root->blink) {
+		if( view == root->prev()) {
 			view = root;
 		}
 
-		braidedNode* ptr = dynamic_cast<braidedNode*> (root->blink);
-		root->blink = ptr->blink;
+		braidedNode* ptr = root->prev();
+		root->blink = ptr->blink;	// manually set the links for the header node
 		delete ptr;
 
 	} else {
@@ -299,8 +361,8 @@ void braidedTree::releaseTree(braidedNode* ptr)
 	cout << ptr << endl;
 	if( ptr != NULL) {
 		
-		releaseTree( dynamic_cast<braidedNode*> (ptr->leftTree));
-		releaseTree( dynamic_cast<braidedNode*> (ptr->rightTree));
+		releaseTree( ptr->leftChild());
+		releaseTree( ptr->rightChild());
 		delete ptr;
 
 	}

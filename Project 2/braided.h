@@ -98,7 +98,10 @@ class braidedTree
 	private:
 		braidedNode*	root;	
 		braidedNode*	view;	
-		braidedNode* findParent(braidedNode*, int value);
+		braidedNode* findParent( braidedNode*, int value);
+		braidedNode* findPos( braidedNode*, int value);
+		bool isLeftmostNode( braidedNode* ptr, braidedNode* target);
+		bool isRightmostNode( braidedNode* ptr, braidedNode* target);
 		void searchTree( braidedNode*, int value, bool& found);
 		void releaseTree( braidedNode*);
 };
