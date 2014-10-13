@@ -99,13 +99,31 @@ int main()
 			int value;
 			cin >> value;
 
-			bt.insert( value);
+			if( bt.insert( value)) {
+		
+				cout << "inserted " << value << " into the tree" << endl;
+
+			} else {
+
+				cout << "insert did not put " << value 
+				<< " into the tree" << endl;
+
+			}
+
 		} else if(cmd == '-') {
 
 			int value;
 			cin >> value;
 
-			bt.remove( value);
+			if ( bt.remove( value)) {
+
+				cout << "removed " << value << " from the tree" << endl;
+
+			} else {
+	
+				cout << "could not remove " << value 
+				<< " from the tree" << endl;
+			}
 
 		} else if(cmd == 'M') {
 

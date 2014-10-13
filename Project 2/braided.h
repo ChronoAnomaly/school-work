@@ -99,6 +99,7 @@ class braidedTree
 		braidedNode*	root;	
 		braidedNode*	view;	
 		braidedNode* findParent( braidedNode*, int value);
+		bool isLeaf( braidedNode*);
 		braidedNode* findPos( braidedNode*, int value);
 		bool checkLinks( braidedNode*);
 		bool isLeftmostNode( braidedNode* ptr, braidedNode* target);

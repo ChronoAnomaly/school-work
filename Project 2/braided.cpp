@@ -249,6 +249,11 @@ bool braidedTree::insert( int value)
 	}
 }
 
+/*
+	This function is used to ensure that the prev and next links for a node are
+	set up right. It will travel the tree to see where the node exists in the tree
+	and set up links accordingly.
+*/
 bool braidedTree::checkLinks( braidedNode* target)
 {
 
@@ -277,6 +282,11 @@ bool braidedTree::checkLinks( braidedNode* target)
 	}
 }
 
+/*
+	This function is used to find the current position of node with the data: value.
+	It returns a pointer to the node if it is found, otherwise it will return
+	a NULL.
+*/
 braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 {
 
@@ -295,6 +305,12 @@ braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 	return ptr;
 }
 
+/*
+	This function is used to find the parent of a certain node. It will go through
+	the tree until it comes across a node which one of its children contain the
+	value we are looking for. If found, it will return a pointer to the parent, else
+	it will return NULL.
+*/
 braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
 {
 
@@ -358,11 +374,65 @@ bool braidedTree::isRightmostNode( braidedNode* ptr, braidedNode* target)
 	}
 }
 
-bool braidedTree::remove( int )			
+bool braidedTree::isLeaf( braidedNode* ptr)
+{
+
+	if( ptr->rightChild() == NULL && ptr->leftChild() == NULL) {
+		
+		return true;
+	} else {
+		
+		return false;
+	}
+}
+
+bool braidedTree::remove( int value)			
 {
 	cout << "remove" << endl;
 
-	return false;
+	bool found = false;
+
+	searchTree( root->rightChild(), value, found);
+
+	if( found) {
+
+		braidedNode* parent = findParent( root->rightChild(), value);	
+
+		if( value < parent->data) {
+
+			braidedNode* doomed = parent->leftChild();
+		
+			if( isLeaf( doomed)) {
+
+				parent->leftTree = NULL;
+				parent->blink = doomed->prev();
+				delete doomed;
+
+			} else {
+
+			}
+		} else {
+
+			braidedNode* doomed = parent->rightChild();
+
+			if( isLeaf( doomed)) {
+
+				parent->rightTree = NULL;
+				parent->flink = doomed->next();
+				delete doomed;
+
+			} else {
+		
+			}
+			
+		}
+		return found;
+
+	} else {
+
+		view = root;
+		return found;
+	}
 }
 
 int braidedTree::removeMin(void)
