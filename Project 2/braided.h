@@ -34,7 +34,8 @@ class treeNode
 			rightTree = NULL;
 			std::cout << "treeNode" << std::endl;
 		}
-		virtual ~treeNode(void); 		// treeNode destructor
+		virtual ~treeNode(void) 		// treeNode destructor
+		{ std::cout << "~treeNode" << std::endl; return; }
 	protected:
 		int	data;		// data contents of the tree
 		treeNode* leftTree;		// pointer to the left subtree
@@ -97,7 +98,8 @@ class braidedTree
 	private:
 		braidedNode*	root;	
 		braidedNode*	view;	
-		void releaseTree(braidedNode*);
+		void searchTree( braidedNode*, int value, bool& found);
+		void releaseTree( braidedNode*);
 };
 
 #endif

@@ -78,7 +78,13 @@ int main()
 			int value;
 			cin >> value;
 
-			bt.find( value);
+			if( bt.find( value)) {
+
+				cout << "The value was found" << endl;
+			} else {
+
+				cout << "The value was not found in the tree" << endl;
+			}
 
 		} else if(cmd == '<') {
 
@@ -108,7 +114,7 @@ int main()
 
 		} else if(cmd == 'X') {
 
-			cout MM boolalpha << "removeMax() successful: "
+			cout << boolalpha << "removeMax() successful: "
 			 << bt.removeMax() << endl;
 
 		} else if(cmd != 'Q') {

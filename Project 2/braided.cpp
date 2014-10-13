@@ -9,7 +9,8 @@ using namespace std;
 
 
 node*	node::insert( node* )
-{ cout << "insert" << endl; return NULL; }
+{
+ cout << "insert" << endl; return NULL; }
 
 node*	node::remove( void )
 { cout << "remove" << endl; return NULL; }
@@ -19,8 +20,6 @@ node*	node::remove( void )
 // class treeNode member functions
 //
 
-treeNode::~treeNode(void)
-{ cout << "~treeNode" << endl; return; }
 
 
 //
@@ -76,10 +75,10 @@ void braidedTree::display()
 	
 	while(ptr != root) {
 
-		cout << " " << ptr->data << (ptr->next != root) ? "," : "]";
+		cout << " " << ptr->data; 
 	}
 
-	cout << endl;
+	cout << "]" << endl;
 	return;
 }
 
@@ -126,11 +125,37 @@ bool braidedTree::isEmpty()
 	return root->rightTree == NULL;
 }
 
-bool braidedTree::find( int )
+/*
+	This function will start a search in the current tree for some value and
+	will return true or false if the value is found in the tree.
+*/
+bool braidedTree::find( int value)
 {
 	cout << "find" << endl;
 	
-	return false;
+	bool found = false;
+
+	searchTree( dynamic_cast<braidedNode*> (root->rightTree), value, found);
+	
+	return found;
+}
+
+/*
+	Searches through the current tree for the value. If it is found, it will update
+	a boolean varible to true and exit the recursion.
+*/
+void braidedTree::searchTree( braidedNode* ptr, int value, bool& found)
+{
+
+	if( ptr != NULL && !found){
+
+		if( ptr->data == value){
+			found = true;
+			view = ptr;
+		}
+		searchTree( dynamic_cast<braidedNode*> (ptr->leftTree), value, found);
+		searchTree( dynamic_cast<braidedNode*> (ptr->rightTree), value, found);
+	}
 }
 
 /*
