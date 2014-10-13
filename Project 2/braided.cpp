@@ -207,8 +207,8 @@ bool braidedTree::insert( int value)
 	and set its links to the root node. */
 	if( isEmpty()) {
 
+		root->rightTree = new braidedNode( value);
 		braidedNode* ptr = root->rightChild();
-		ptr = new braidedNode( value);
 		ptr->flink = root;
 		ptr->blink = root;
 		root->flink = ptr;
@@ -290,11 +290,17 @@ bool braidedTree::checkLinks( braidedNode* target)
 braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 {
 
+	braidedNode* target = ( value < ptr->data) ? ptr->leftChild(): ptr->rightChild();
+
+	return (target) ? findPos( target, value) : ptr;
+/*
 	if( ptr == NULL) {
 
 		return NULL;
-	}
+	} else if {
 
+		
+	}
 	if( value > ptr->data) {
 
 		findPos( ptr->rightChild(), value);
@@ -303,6 +309,7 @@ braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 		findPos( ptr->leftChild(), value);
 	}
 	return ptr;
+*/
 }
 
 /*
