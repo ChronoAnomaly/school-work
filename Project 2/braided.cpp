@@ -37,7 +37,7 @@ int braidedTree::next()
 {
 	cout << "next" << endl;
 	
-	if( view == root) {
+	if( !isEmpty()) {
 		cout << "The tree is currently empty" << endl;
 	} else {
 
@@ -50,7 +50,7 @@ int braidedTree::prev()
 {
 	cout << "prev" << endl;
 
-	if( view == root) {
+	if( !isEmpty()) {
 		cout << "The tree is currently empty" << endl;
 	} else {
 
@@ -76,6 +76,7 @@ void braidedTree::display()
 	while(ptr != root) {
 
 		cout << " " << ptr->data; 
+		ptr = ptr->next();
 	}
 
 	cout << "]" << endl;
@@ -90,7 +91,7 @@ bool braidedTree::isFirst()
 {
 	cout << "isFirst" << endl;
 
-	return (!isEmpty() && (view == root->flink));
+	return (!isEmpty() && (view == root->next()));
 }
 
 /*
@@ -101,7 +102,7 @@ bool braidedTree::isLast()
 {
 	cout << "isLast" << endl;
 
-	return (!isEmpty() && (view == root->blink));
+	return (!isEmpty() && (view == root->prev()));
 }
 
 /*
@@ -121,7 +122,7 @@ bool braidedTree::isHead()
 bool braidedTree::isEmpty()	
 {
 	cout << "isEmpty" << endl;
-	
+	cout << boolalpha << "is empty = " << (root->rightTree == NULL) << endl;
 	return root->rightTree == NULL;
 }
 
@@ -206,13 +207,13 @@ bool braidedTree::insert( int value)
 	and set its links to the root node. */
 	if( isEmpty()) {
 
-		braidedNode* ptr = root->rightChild();
-		ptr = new braidedNode( value);
+		braidedNode* ptr = new braidedNode( value);
 		ptr->flink = root;
 		ptr->blink = root;
 		root->flink = ptr;
 		root->blink = ptr;
 
+		root->rightTree = ptr;
 		view = ptr;
 		return true;
 	} else {
@@ -226,19 +227,68 @@ bool braidedTree::insert( int value)
 
 
 			braidedNode* ptr =  findPos( root->rightChild(), value);
+			if( value < ptr->data) {
 			
+				braidedNode* target = new braidedNode( value);
+				checkLinks( target);
+
+				ptr->leftTree = target;
+				view = target;
+
+			} else {
+
+				braidedNode* target = new braidedNode( value);
+				checkLinks( target);
+	
+				ptr->leftTree = target;
+				view = target;
+			}
 			
+			return true;
 		}
+	}
+}
+
+bool braidedTree::checkLinks( braidedNode* target)
+{
+
+	braidedNode* parent = findParent( root->rightChild(), target->data);
+
+	if( isLeftmostNode( root->rightChild(), target)) {
+
+		target->blink = root;
+		target->flink = parent;
+		parent->blink = target;
+	} else if( isLeftmostNode( root->rightChild()->rightChild(), target)) {
+
+		target->blink = root->rightChild();
+		target->flink = parent;
+		parent->blink = target;
+	} else if( isRightmostNode( root->rightChild(), target)) {
+
+		target->flink = root;
+		target->blink = parent;
+		parent->flink = target;
+	} else if( isRightmostNode( root->rightChild()->leftChild(), target)) {
+
+		target->flink = root->rightChild();
+		target->blink = parent;
+		parent->flink = target;
 	}
 }
 
 braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 {
 
+	if( ptr == NULL) {
+
+		return NULL;
+	}
+
 	if( value > ptr->data) {
 
 		findPos( ptr->rightChild(), value);
-	} else {
+	} else if ( value < ptr->data) {
 
 		findPos( ptr->leftChild(), value);
 	}
@@ -248,13 +298,21 @@ braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
 {
 
-	if( ptr->leftTree->data == value || ptr->rightTree->data == value) {
+	if( ptr == NULL) {
+
+		return NULL;
+	} else if( ptr == root->rightChild()) {
+
+		return ptr;
+	}
+
+	if( ptr->leftTree != NULL || ptr->rightTree != NULL || ptr->leftTree->data == value 
+	|| ptr->rightTree->data == value) {
 
 		return ptr;
 	}
 	findParent( ptr->leftChild(), value);
 	findParent( ptr->rightChild(), value);
-	return NULL;
 }
 
 /*
@@ -265,7 +323,7 @@ braidedNode* braidedTree::findParent( braidedNode* ptr, int value)
 bool braidedTree::isLeftmostNode( braidedNode* ptr, braidedNode* target)
 {
 
-	while( ptr->leftTree != NULL) {
+	while( ptr != NULL && ptr->leftTree != NULL) {
 	
 		ptr = ptr->leftChild();
 	}
@@ -287,7 +345,7 @@ bool braidedTree::isLeftmostNode( braidedNode* ptr, braidedNode* target)
 bool braidedTree::isRightmostNode( braidedNode* ptr, braidedNode* target)
 {
 
-	while( ptr->rightTree != NULL) {
+	while( ptr != NULL && ptr->rightTree != NULL) {
 		ptr = ptr->rightChild();
 	}
 	
