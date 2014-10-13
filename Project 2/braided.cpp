@@ -246,7 +246,7 @@ bool braidedTree::insert( int value)
 				braidedNode* target = ptr->rightChild();
 				target->flink = ptr->next();
 				target->blink = ptr;
-				ptr->flink->blink = target
+				ptr->flink->blink = target;
 				ptr->flink = target;
 	
 				ptr->rightTree = target;
@@ -359,6 +359,9 @@ bool braidedTree::isRightmostNode( braidedNode* ptr, braidedNode* target)
 	}
 }
 
+/*
+	Used by remove function to determine if the node is a leaf node.
+*/
 bool braidedTree::isLeaf( braidedNode* ptr)
 {
 
@@ -395,6 +398,7 @@ bool braidedTree::remove( int value)
 
 			} else {
 
+				parent = parent->leftChild();
 			}
 		} else {
 
@@ -408,6 +412,7 @@ bool braidedTree::remove( int value)
 
 			} else {
 		
+				parent = parent->rightChild();
 			}
 			
 		}
@@ -420,10 +425,15 @@ bool braidedTree::remove( int value)
 	}
 }
 
+/*
+	Removes the smallest node currently in the tree and returns the value of the node.
+*/
 int braidedTree::removeMin(void)
 {
 	cout << "removeMin" << endl;
 	
+	int val = 0;
+
 	if( !isEmpty()) {
 
 		if( view == root->next()) {
@@ -431,7 +441,11 @@ int braidedTree::removeMin(void)
 		}
 
 		braidedNode* ptr = root->next();
-		root->flink = ptr->flink;	// manually set the links for the header node
+		braidedNode* clearChild = findParent( root->rightChild(), root->next()->data);
+		clearChild->leftTree = NULL;
+		root->flink = ptr->next();	// manually set the links for the header node
+		ptr->flink->blink = ptr->prev();
+		val = ptr->data;
 		delete ptr;
 		
 	} else {
@@ -439,13 +453,18 @@ int braidedTree::removeMin(void)
 		cout << "The tree is currently empty" << endl;
 	}
 
-	return 0;
+	return val;
 }
 
+/*
+	Removes the largest node currently in the tree and returns the value of the node.
+*/
 int braidedTree::removeMax(void)
 {
 	cout << "removeMax" << endl;
 	
+	int val = 0;
+
 	if( !isEmpty()) {
 
 		if( view == root->prev()) {
@@ -453,7 +472,11 @@ int braidedTree::removeMax(void)
 		}
 
 		braidedNode* ptr = root->prev();
+		braidedNode* clearChild = findParent( root->rightChild(), root->prev()->data);
+		clearChild->rightTree = NULL;
 		root->blink = ptr->blink;	// manually set the links for the header node
+		ptr->blink->flink = ptr->next();
+		val = ptr->data;
 		delete ptr;
 
 	} else {
@@ -461,7 +484,7 @@ int braidedTree::removeMax(void)
 		cout << "The tree is currently empty" << endl;
 	}
 
-	return 0;
+	return val;
 }
 
 /*
