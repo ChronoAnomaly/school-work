@@ -123,7 +123,7 @@ bool braidedTree::isEmpty()
 {
 	cout << "isEmpty" << endl;
 	cout << boolalpha << "is empty = " << (root->rightTree == NULL) << endl;
-	return root->rightTree == NULL;
+	return (root->rightChild() == NULL);
 }
 
 /*
@@ -207,13 +207,13 @@ bool braidedTree::insert( int value)
 	and set its links to the root node. */
 	if( isEmpty()) {
 
-		braidedNode* ptr = new braidedNode( value);
+		braidedNode* ptr = root->rightChild();
+		ptr = new braidedNode( value);
 		ptr->flink = root;
 		ptr->blink = root;
 		root->flink = ptr;
 		root->blink = ptr;
 
-		root->rightTree = ptr;
 		view = ptr;
 		return true;
 	} else {
@@ -229,18 +229,18 @@ bool braidedTree::insert( int value)
 			braidedNode* ptr =  findPos( root->rightChild(), value);
 			if( value < ptr->data) {
 			
-				braidedNode* target = new braidedNode( value);
+				braidedNode* target = ptr->leftChild();
+				target = new braidedNode( value);
 				checkLinks( target);
 
-				ptr->leftTree = target;
 				view = target;
 
 			} else {
 
-				braidedNode* target = new braidedNode( value);
+				braidedNode* target = ptr->rightChild();
+				target = new braidedNode( value);
 				checkLinks( target);
 	
-				ptr->leftTree = target;
 				view = target;
 			}
 			
