@@ -33,6 +33,9 @@ node*	node::remove( void )
 // class braidedTree member functions
 //
 
+/*
+	Returns the next node in the tree.
+*/
 int braidedTree::next()	
 {
 	cout << "next" << endl;
@@ -46,6 +49,9 @@ int braidedTree::next()
 	}
 }
 
+/*
+	Returns the previous node in the tree.
+*/
 int braidedTree::prev()	
 {
 	cout << "prev" << endl;
@@ -58,6 +64,10 @@ int braidedTree::prev()
 		return view->data;
 	}
 }
+
+/*
+	Returns the value of the view node.
+*/
 int braidedTree::value()
 {
 	cout << "value" << endl;
@@ -65,6 +75,9 @@ int braidedTree::value()
 	return view->data;
 }
 
+/*
+	Cycles through the eniter list and prints the values out in-order.
+*/
 void braidedTree::display()		
 {
 	cout << "display" << endl;
@@ -261,33 +274,15 @@ bool braidedTree::insert( int value)
 
 
 /*
-	This function is used to find the current position of node with the data: value.
-	It returns a pointer to the node if it is found, otherwise it will return
-	a NULL.
+	This function is used to find the insertion point for a node in order to place
+	it into the tree.
 */
 braidedNode* braidedTree::findPos( braidedNode* ptr, int value)
 {
 
 	braidedNode* target = ( value < ptr->data) ? ptr->leftChild(): ptr->rightChild();
 
-	return (target) ? findPos( target, value) : ptr;
-/*
-	if( ptr == NULL) {
-
-		return NULL;
-	} else if {
-
-		
-	}
-	if( value > ptr->data) {
-
-		findPos( ptr->rightChild(), value);
-	} else if ( value < ptr->data) {
-
-		findPos( ptr->leftChild(), value);
-	}
-	return ptr;
-*/
+	return target ? findPos( target, value) : ptr;
 }
 
 /*
@@ -374,6 +369,12 @@ bool braidedTree::isLeaf( braidedNode* ptr)
 	}
 }
 
+/*
+	This function is used to find and remove a certain node from the current tree. 
+	(There is a bug in it somewhere, but after spending quite a lot of time looking
+	through this function and how the other functions interact, I could not figure
+	out how to solve it)
+*/
 bool braidedTree::remove( int value)			
 {
 	cout << "remove" << endl;
@@ -384,6 +385,7 @@ bool braidedTree::remove( int value)
 
 	if( found) {
 
+		cout << boolalpha << "found = " << found << endl;
 		braidedNode* parent = findParent( root->rightChild(), value);	
 
 		if( value < parent->data) {
@@ -392,59 +394,66 @@ bool braidedTree::remove( int value)
 		
 			if( isLeaf( doomed)) {
 
-				parent->leftTree = NULL;
 				parent->blink = doomed->prev();
-				delete doomed;
+				doomed->blink->flink = doomed->next();
+
+				parent->leftTree = NULL;
+				return found;
 
 			} else {
 
 				if( doomed->leftTree != NULL) {
 			
 					braidedNode* left = doomed->leftChild();
-					left->flink = parent;
+					left->flink = doomed->next();
+					parent->blink = left;
 					parent->leftTree = left;
-					//parent->leftTree = doomed->leftChild();
-					//parent->leftTree->flink = parent;
-					delete doomed;
-				} else {
+					doomed = NULL;
+				
+				} else if ( doomed->rightTree != NULL) {
 
 					braidedNode* right = doomed->rightChild();
-					right->blink = parent;
+					right->blink = doomed->prev();
+					parent->flink = right;
 					parent->rightTree = right;
-					//parent->rightTree = doomed->rightChild();
-					//parent->rightTree->blink = parent;
-					delete doomed;
+					doomed = NULL;
 				}
+				view = parent;
+				return found;
 			}
+
 		} else {
 
 			braidedNode* doomed = parent->rightChild();
 
 			if( isLeaf( doomed)) {
 
-				parent->rightTree = NULL;
 				parent->flink = doomed->next();
-				delete doomed;
+				doomed->flink->blink = doomed->prev();
+
+				parent->rightTree = NULL;
+				return found;
 
 			} else {
 	
 				if( doomed->leftTree != NULL) {
 
 					braidedNode* left = doomed->leftChild();
+					left->flink = doomed->next();
 					left->flink = parent;
 					parent->leftTree = left;
-					//parent->leftTree = doomed->leftChild();
-					//parent->leftTree->flink = parent;
-					delete doomed;
-				} else {
+					doomed = NULL;
+				
+				} else if ( doomed->rightTree != NULL) {
 
 					braidedNode* right = doomed->rightChild();
+					right->blink = doomed->prev();
 					right->blink = parent;
 					parent->rightTree = right;
-					//parent->rightTree = doomed->rightChild();
-					//parent->rightTree->blink = parent;
-					delete doomed;
+					doomed = NULL;
 				}
+				view = parent;
+				return found;
 			}
 			
 		}
@@ -474,12 +483,12 @@ int braidedTree::removeMin(void)
 
 		braidedNode* ptr = root->next();
 		braidedNode* clearChild = findParent( root->rightChild(), root->next()->data);
-		clearChild->leftTree = NULL;
 		root->flink = ptr->next();	// manually set the links for the header node
 		ptr->flink->blink = ptr->prev();
 		val = ptr->data;
-		delete ptr;
-		
+		//delete ptr;
+		clearChild->leftTree = NULL;
+
 	} else {
 
 		cout << "The tree is currently empty" << endl;
@@ -505,11 +514,12 @@ int braidedTree::removeMax(void)
 
 		braidedNode* ptr = root->prev();
 		braidedNode* clearChild = findParent( root->rightChild(), root->prev()->data);
-		clearChild->rightTree = NULL;
 		root->blink = ptr->blink;	// manually set the links for the header node
 		ptr->blink->flink = ptr->next();
 		val = ptr->data;
-		delete ptr;
+		//delete ptr;
+		clearChild->rightTree = NULL;
+
 
 	} else {
 
