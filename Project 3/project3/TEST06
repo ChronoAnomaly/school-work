@@ -1,0 +1,28 @@
+M Test #6: A fairly extensive test
+F 2500
+T
+M (A) Creating as many files of size 1 as possible
+X1 1
+M (B) Creating as many files of average size 50 as possible
+X2 1000 50
+C XYZ00000 500 0
+C XYZ00100 500 0
+C XYZ00200 500 0
+L
+T
+G
+L
+T
+O XYZ00000 0
+O XYZ00100 0
+O XYZ00200 0
+I XYZ00000 0
+I XYZ00100 0
+I XYZ00200 0
+D XYZ00000 0
+D XYZ00100 0
+D XYZ00200 0
+L
+T
+S
+Q

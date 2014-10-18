@@ -1,0 +1,8 @@
+M Test #2: simple CREATE and DELETE
+F 2050
+T
+C FILE0000 900 0
+T
+D FILE0000 0
+T
+Q

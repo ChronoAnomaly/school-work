@@ -1,0 +1,23 @@
+M Test #4: Error handling
+F 2000
+T
+M Attempting to create a file that is too big
+C FILE0000 3000 1
+C FILE0000 1000 0
+M Attempting to create a duplicate file
+C FILE0000 1000 4
+M Not enough space is available for the next file
+C FILE0001 1000 2
+C FILE0001    1 0
+M Attempting to create a duplicate file
+C FILE0000 1000 4
+M Attempting to create a duplicate file
+C FILE0001    2 4
+D FILE0000 0
+M Attempting to delete two nonexistant files
+D FILE0000 4
+D FILE0099 4
+M This deletion should be successful
+D FILE0001 0
+T
+Q

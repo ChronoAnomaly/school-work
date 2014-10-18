@@ -1,0 +1,36 @@
+Contents:
+	1) Description of files in this directory
+	2) Remarks (these will be in reverse chronological
+	   order.)
+
+DESCRIPTION OF FILES
+File     Accessible Description
+-------- ---------- ---------------------------------------------
+Makefile     Yes    A make file to simplify compilation.  The command
+                    "make" with no parameters builds the driver.  Change
+                    the line "OBJFILES =" to specify your object program
+                    files.
+
+                              *** HEADER FILES ***
+disk.h       Yes    Definitions for the very low-level disk interface.
+                    You do not need this for any reason except to
+                    compile driver.cpp and disk.cpp.
+driver.h     Yes    Definitions for the driver -- these agree with the
+                    handout for disk simulation project.
+
+                              *** SOURCE FILES ***
+driver.cpp  Yes    Source for a driver program to aid you in testing
+                    your disk program.
+stub.cpp    Yes    A stub used to test the driver.  You might want
+                    to use it as a starting point to save a little
+                    typing.
+disk.cpp    Yes    The low-level disk routines needed by the driver.
+                    You do not need to access any of these routines
+                    directly.
+
+                            *** TEST FILES ***
+TESTnn       Yes    The various tests are documented in message (M)
+                    commands
+FINAL      Not Yet  The turn in test input file for those who complete
+                    the project.
+
