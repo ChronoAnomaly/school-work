@@ -1,6 +1,6 @@
 #ifndef _DRIVER_
 
-#define _DIVER_
+#define _DRIVER_
 
 /****************************************************************
  * FILE
