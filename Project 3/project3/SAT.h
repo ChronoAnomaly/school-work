@@ -15,9 +15,8 @@ class SAT {
 
 	public:
 		SAT();
-		SAT( SAT& );
 		~SAT();
-		int operator[] ( int );
+		int operator[] ( int ) const;
 
 	private:
 		const int bitsPerTrack = 1024;

@@ -8,7 +8,7 @@ using namespace std;
 class nullele {
 
 	public:
-		const static int spacer = 0;
+		const static int spacer = NULL;
 		int address;
 };
 
@@ -16,8 +16,8 @@ class element {
 
 	public:
 		string name;
-		int size;
-		int address;
+		unsigned short int size;
+		unsigned short int address;
 };
 
 class node{
