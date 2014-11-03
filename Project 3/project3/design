@@ -4,3 +4,9 @@ bitset size is 1024, will make a 2d array based on how tracks there are.
 basic bitset can hold 1024 tracks of information.
 
 
+FAT
+
+for setting up the FAT table size. check the total number of tracks and then
+compare it to an exponential eq of 6^x where x incrases if the number of tracks
+is larger than the result.  this will allow the table to be dynamic enough to
+cotain a many small files as possible and keep the table size down on the disk.

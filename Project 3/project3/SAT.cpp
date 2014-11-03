@@ -9,19 +9,24 @@
 using namespace std;
 
 
-SAT::SAT( )
+bitset<SAT::bitsPerTrack> buf;
+bool exists = false;
+
+void SAT::init()
 {
+	if( !exists) {
+		makeTable();
+	}
+}
+
+int SAT::operator[] ( int pos) const
+{
+	return buf[pos];
 
 }
 
-SAT::~SAT()
+
+void SAT::makeTable()
 {
-
-}
-
-
-int SAT::operator[] ( int pos)
-{
-
-
+	exists = true;
 }

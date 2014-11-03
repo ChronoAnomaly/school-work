@@ -17,12 +17,14 @@ class SAT {
 		SAT();
 		~SAT();
 		int operator[] ( int ) const;
+		void init();
 
 	private:
+		void makeTable();
 		const int bitsPerTrack = 1024;
 		static bitset<bitsPerTrack> buf;
-	
+		static bool exists;
 
-}
+};
 
 #endif
