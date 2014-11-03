@@ -10,6 +10,7 @@
 
 #include <bitset>
 
+using namespace std;
 
 class SAT {
 
@@ -21,7 +22,7 @@ class SAT {
 
 	private:
 		void makeTable();
-		const int bitsPerTrack = 1024;
+		static const int bitsPerTrack = 1024;
 		static bitset<bitsPerTrack> buf;
 		static bool exists;
 

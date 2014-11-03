@@ -8,14 +8,15 @@
 
 using namespace std;
 
+//const int SAT::bitsPerTrack = 1024;
+bitset<SAT::bitsPerTrack> SAT::buf;
+bool SAT::exists = false;
 
-bitset<SAT::bitsPerTrack> buf;
-bool exists = false;
 
 void SAT::init()
 {
-	if( !exists) {
-		makeTable();
+	if( !SAT::exists) {
+		SAT::makeTable();
 	}
 }
 
@@ -28,5 +29,5 @@ int SAT::operator[] ( int pos) const
 
 void SAT::makeTable()
 {
-	exists = true;
+	SAT::exists = true;
 }
