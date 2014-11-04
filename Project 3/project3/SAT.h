@@ -18,14 +18,14 @@ class SAT {
 		SAT();
 		~SAT();
 		void init();
-		int getBit( int);
-		void setBit( int);
+		int getBit( int index);
+		void setBit( int index, int bit);
 		
 
 	private:
 		void makeTable();
 		static const int bitsPerTrack = 1024;
-		static bitset<bitsPerTrack> buf;
+		static bitset<bitsPerTrack> sat_table;
 		static bool exists;
 
 };
