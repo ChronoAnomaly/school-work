@@ -19,18 +19,23 @@
 
 using namespace std;
 
+int g_tracks = 0;
+
 /****************************************************************
  * Part I. Managing the storage allocation table
  ****************************************************************/
 
-void FormatDisk( int )
-	{	
-	}
+void FormatDisk( int tracks)
+{
+	
+}
 
 int Allocate( int &L, int S)
-	{
-	return 0;
+{
+	if( S < 1 || S > g_tracks) {
+		return 1;
 	}
+}
 
 int Release( int, int )
 	{

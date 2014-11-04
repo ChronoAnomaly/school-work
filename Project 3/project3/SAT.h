@@ -17,8 +17,10 @@ class SAT {
 	public:
 		SAT();
 		~SAT();
-		int operator[] ( int ) const;
 		void init();
+		int getBit( int);
+		void setBit( int);
+		
 
 	private:
 		void makeTable();
