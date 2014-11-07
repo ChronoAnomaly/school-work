@@ -12,25 +12,19 @@ OBJFILES	= driver.o disk.o stub.o SAT.o FAT.o
 driver:		$(OBJFILES)
 	g++ -o driver $(OBJFILES)
 
-test:	clean driver
-	@echo
-	@echo Test Suite 1
-	./driver < TEST01
-	@echo
-	@echo Test Suite 2
-	./driver < TEST02
-	@echo
-	@echo Test Suite 3
-	./driver < TEST03
-	@echo
-	@echo Test Suite 4
-	./driver < TEST04
-	@echo
-	@echo Test Suite 5
-	./driver < TEST05
-	@echo
-	@echo Test Suite 6
-	./driver < TEST06
+test:	driver
+	echo Test Suite 1 > test_results.txt
+	./driver < TEST01 >> test_results.txt
+	echo Test Suite 2 >> test_results.txt
+	./driver < TEST02 >> test_results.txt
+	echo Test Suite 3 >> test_results.txt
+	./driver < TEST03 >> test_results.txt
+	echo Test Suite 4 >> test_results.txt
+	./driver < TEST04 >> test_results.txt
+	echo Test Suite 5 >> test_results.txt
+	./driver < TEST05 >> test_results.txt
+	echo Test Suite 6 >> test_results.txt
+	./driver < TEST06 >> test_results.txt
 
 clean:
 	rm *.o

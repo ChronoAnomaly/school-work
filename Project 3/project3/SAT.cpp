@@ -5,30 +5,45 @@
  */
 
 #include "SAT.h"
+#include "driver.h"
+#include <cassert>
 
 using namespace std;
 
 //const int SAT::bitsPerTrack = 1024;
 bitset<SAT::bitsPerTrack> SAT::sat_table;
-bool SAT::exists = false;
+//bool SAT::exists = false;
+int SAT::loaded_track = -1;
 
 /*
  *	init: used to initalize the SAT sat_table.
  */
-void SAT::init()
+void SAT::init( int tracks)
 {
-	if( !SAT::exists) {
-		SAT::makeTable();
+	SAT::sat_table = 0;
+	int sat_track_space = tracks / SAT::bitsPerTrack;
+
+	for( int i = 0; i <= sat_track_space; i++) {
+		assert( WriteDisk( (unsigned char*) &SAT::sat_table, i) == 0);
 	}
+	
+
 }
 
 /*
  *	getBit: is used to access the bit at the given index.
  *	returns: the bit at index
  */
-int SAT::getBit( int index)
+int SAT::getBit( int index) const
 {
-	return SAT::sat_table[index];
+	int calc_track = index / SAT::bitsPerTrack;
+	if( SAT::loaded_track != calc_track) {
+		assert( ReadDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
+		SAT::loaded_track = calc_track;
+	}
+	int pos = index % SAT::bitsPerTrack;
+
+	return SAT::sat_table[pos];
 }
 
 /*
@@ -36,11 +51,20 @@ int SAT::getBit( int index)
  */
 void SAT::setBit( int index, int bit)
 {
-	sat_table[index] = bit;
+	int calc_track = index / SAT::bitsPerTrack;
+	if( SAT::loaded_track != calc_track) {
+		assert( ReadDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
+		SAT::loaded_track = calc_track;
+	}
+	int pos = index % SAT::bitsPerTrack;
+
+	SAT::sat_table[pos] = bit;
+	assert( WriteDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
 }
 
-void SAT::makeTable()
+int SAT::findSpace( int size) const
 {
-	sat_table = 0;
-	SAT::exists = true;
+	int address = -1;
+	
+	
 }
