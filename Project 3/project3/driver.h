@@ -14,7 +14,7 @@
  */
 
 #define TRACKSIZE	128	
-
+#define RESTART
 /****************************************************************
  * Part I. Managing the storage allocation table
  ****************************************************************/
@@ -23,6 +23,7 @@ void FormatDisk( int );
 int Allocate( int&, int );
 int Release( int, int );
 void Table();
+void Restart( int);
 
 /****************************************************************
  * Part II. Managing the file allocation table

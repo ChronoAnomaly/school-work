@@ -23,7 +23,10 @@
 using namespace std;
 
 int g_tracks = 0;
-int g_FAT_address = -1;
+int g_FAT_address = -1;		// location for the begining of the FAT table on the disk
+int g_reserved_end = -1;	/* address for the end of resricted space on the disk
+				 * (SAT and FAT tables)
+				 */
 
 /****************************************************************
  * Part I. Managing the storage allocation table
@@ -51,7 +54,12 @@ int Release( int address, int size)
 /****************************************************************
  * Part II. Managing the file allocation table
  ****************************************************************/
-
+/*
+ *	Table: used to print out the current allocation table of the disk.
+ *	Format - Allocation table as the table header, then bits 0 - 64 on the top.
+ *	Multiples of 64 bits are on the left side of the table. This allows for easy
+ *	understanding of the index location for an item within the table.
+ */
 void Table()
 {
 	SAT sTable;
@@ -80,6 +88,7 @@ void Table()
 	
 	cout << endl;
 	
+	// main part of the allocation table
 	for( int i = 0; ptr < SAT_size; i++, ptr += 64) {
 		cout << setfill( '0') << setw( 5) << i * table_width;
 		cout << "  ";
@@ -90,6 +99,10 @@ void Table()
 	}
 }
 
+void Restart( int totalTracks)
+{
+
+}
 	// File Allocation Table Routines
 
 int CreateFile( char*, int, int & )
