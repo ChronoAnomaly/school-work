@@ -7,6 +7,7 @@
 #include "SAT.h"
 #include "driver.h"
 #include <cassert>
+#include <iostream>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ void SAT::init( int tracks)
 
 	// determine which bits are allocated for the inital SAT table
 	for( int i = 0; i <= sat_overflow; i++) {
-	
+	std::cout << "inside sat overflow loop " << sat_overflow << std::endl;
 		for( int j = 0; j < sat_track_space && j < SAT::bitsPerTrack; j++) {
 			SAT::sat_table[j] = 1;
 		}
@@ -50,8 +51,9 @@ void SAT::init( int tracks)
  *	getBit: is used to access the bit at the given index.
  *	returns: the bit at index
  */
-int SAT::getBit( int index) const
+int SAT::getBit( int index)
 {
+
 	int calc_track = index / SAT::bitsPerTrack;
 	if( SAT::loaded_track != calc_track) {
 		assert( ReadDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
