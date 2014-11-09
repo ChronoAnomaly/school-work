@@ -14,14 +14,26 @@ class FAT {
 
 	public:
 		FAT();
-		FAT( FAT& );
 		~FAT():
 		int operator[] ( int );
 
 	private:
-		const int bitsPerTrack = 1024;
-		static bitset<bitsPerTrack> buf;
 
 }
 
+class element {
+
+	public:
+		element()
+		{ name = "null"; size = -1; address = -1; }
+		string name;
+		unsigned short int size;
+		unsigned short int address;
+};
+
+class node {
+
+	public:
+		element files[8];
+}
 #endif

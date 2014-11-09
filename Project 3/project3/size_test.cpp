@@ -5,12 +5,6 @@
 
 using namespace std;
 
-class nullele {
-
-	public:
-		const static int spacer = NULL;
-		int address;
-};
 
 class element {
 
@@ -23,17 +17,7 @@ class element {
 class node{
 
 	public:
-		nullele n_one;
-		element one;
-		nullele n_two;
-		element two;
-		nullele n_three;
-		element three;
-		nullele n_four;
-		element four;
-		nullele n_five;
-		element five;
-		nullele n_six;
+		element files[8];
 };
 
 int main()
@@ -47,4 +31,7 @@ int main()
 
 	cout << size << endl;
 
+	for( int i = 0; i <7 ; i++) {
+		cout << check.files[i].name << endl;;
+	}
 }

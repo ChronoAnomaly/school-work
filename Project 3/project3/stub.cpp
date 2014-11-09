@@ -35,7 +35,7 @@ int g_reserved_end = -1;	/* address for the end of resricted space on the disk
 void FormatDisk( int tracks)
 {
 	SAT sTable;
-	sTable.init( tracks);
+	g_FAT_address = sTable.init( tracks);
 	g_tracks = tracks;
 }
 
@@ -64,15 +64,17 @@ int Release( int address, int size)
 	SAT sTable;
 	int index = address;
 
-	if( S < 1 || S > g_tracks - 1) {
+	if( size < 1 || size > g_tracks - 1) {
 		return 1;
 	} else if( address < 0 || address > g_tracks - 1) {
 		return 3;
-	}
+	} else {
 
-	for( int i = 0; i < size; i++) {
-		sTable.setBit( index, 0);
-		index++;
+		for( int i = 0; i < size; i++) {
+			sTable.setBit( index, 0);
+			index++;
+		}
+		return 0;
 	}
 }
 
@@ -90,7 +92,7 @@ void Table()
 	SAT sTable;
 	string title = "Allocation Table";
 	const int table_width = 64;
-	const int SAT_size = g_tracks * ( TRACKSIZE * 8);
+	const int disk_size = g_tracks * ( TRACKSIZE * 8);
 	int ptr = 0;
 
 	cout << setw( 46) << title << endl;
@@ -114,7 +116,7 @@ void Table()
 	cout << endl;
 	
 	// main part of the allocation table
-	for( int i = 0; ptr < SAT_size; i++) {
+	for( int i = 0; ptr < disk_size; i++) {
 		cout << setfill( '0') << setw( 5) << i * table_width;
 		cout << "  ";
 		for( int j = 0; j < table_width; j++, ptr++) {

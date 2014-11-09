@@ -18,16 +18,15 @@ class SAT {
 	public:
 		SAT() { };
 		~SAT() { };
-		void init(int tracks);
+		int init(int tracks);
 		int getBit( int index);
 		void setBit( int index, int bit);
-		int findSpace( int tracks, int size) const;
+		int findSpace( int tracks, int size);
 
 	private:
-		//void makeTable( int tracks);
+		void load( int index);
 		static const int bitsPerTrack = TRACKSIZE * 8;
 		static bitset<bitsPerTrack> sat_table;
-		//static bool exists;
 		static int loaded_track;
 
 };
