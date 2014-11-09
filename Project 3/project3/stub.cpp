@@ -41,14 +41,39 @@ void FormatDisk( int tracks)
 
 int Allocate( int &L, int S)
 {
+	SAT sTable;
+
 	if( S < 1 || S > g_tracks - 1) {
 		return 1;
 	}
+	
+	int address = sTable.findSpace( g_tracks, S);
+	int* ptr = &L;
+
+	if( address == -1) {
+		return 2;
+	} else {
+		*ptr = address;
+		return 0;
+	}
+
 }
 
 int Release( int address, int size)
 {
-	
+	SAT sTable;
+	int index = address;
+
+	if( S < 1 || S > g_tracks - 1) {
+		return 1;
+	} else if( address < 0 || address > g_tracks - 1) {
+		return 3;
+	}
+
+	for( int i = 0; i < size; i++) {
+		sTable.setBit( index, 0);
+		index++;
+	}
 }
 
 /****************************************************************

@@ -21,7 +21,7 @@ class SAT {
 		void init(int tracks);
 		int getBit( int index);
 		void setBit( int index, int bit);
-		int findSpace( int size) const;
+		int findSpace( int tracks, int size) const;
 
 	private:
 		//void makeTable( int tracks);

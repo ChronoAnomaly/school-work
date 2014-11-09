@@ -18,6 +18,7 @@ bitset<SAT::bitsPerTrack> SAT::sat_table;
 int SAT::loaded_track = -1;
 //static int sdebug;
 //static int gdebug;
+
 /*
  *	init: used to initalize the SAT sat_table.
  */
@@ -93,7 +94,7 @@ void SAT::setBit( int index, int bit)
 	assert( WriteDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
 }
 
-int SAT::findSpace( int size) const
+int SAT::findSpace( int tracks, int size) const
 {
 	int address = -1;
 	
