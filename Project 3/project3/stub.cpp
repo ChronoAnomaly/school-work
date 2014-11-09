@@ -89,7 +89,7 @@ void Table()
 	cout << endl;
 	
 	// main part of the allocation table
-	for( int i = 0; ptr < SAT_size; i++, ptr += 64) {
+	for( int i = 0; ptr < SAT_size; i++) {
 		cout << setfill( '0') << setw( 5) << i * table_width;
 		cout << "  ";
 		for( int j = 0; j < table_width; j++, ptr++) {
