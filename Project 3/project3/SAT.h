@@ -18,7 +18,7 @@ class SAT {
 	public:
 		SAT() { };
 		~SAT() { };
-		int init(int tracks);
+		int init( int tracks);
 		int getBit( int index);
 		void setBit( int index, int bit);
 		int findSpace( int tracks, int size);

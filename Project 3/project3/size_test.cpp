@@ -17,7 +17,8 @@ class element {
 class node{
 
 	public:
-		element files[8];
+		unsigned short int elements;
+		element files[7];
 };
 
 int main()

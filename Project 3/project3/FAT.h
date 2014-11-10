@@ -8,18 +8,9 @@
 
 #define _FAT_
 
-#include <bitset>
+#include <string>
 
-class FAT {
-
-	public:
-		FAT();
-		~FAT():
-		int operator[] ( int );
-
-	private:
-
-}
+using namespace std;
 
 class element {
 
@@ -34,6 +25,22 @@ class element {
 class node {
 
 	public:
-		element files[8];
-}
+		node() { elements = 0; }
+		
+		unsigned short int elements;
+		element files[7];
+};
+
+class FAT {
+
+	public:
+		element search( string fileName);
+		void add( string fileName, int& address, int size, int startTrack);
+		void remove(string fileName);
+		void display();
+		int exists( string fileName);
+		static int table_size;
+		static node fat_table;
+		static int loaded_track;
+};
 #endif

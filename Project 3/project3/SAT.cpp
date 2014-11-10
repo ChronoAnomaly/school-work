@@ -67,6 +67,7 @@ void SAT::setBit( int index, int bit)
 	int pos = index % SAT::bitsPerTrack;
 
 	SAT::sat_table[pos] = bit;
+	int calc_track = index / SAT::bitsPerTrack;
 	assert( WriteDisk( (unsigned char*) &SAT::sat_table, calc_track) == 0);
 }
 

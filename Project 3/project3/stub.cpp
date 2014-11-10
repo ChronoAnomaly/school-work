@@ -12,6 +12,7 @@
  */
 
 #include <iostream>
+#include <cassert>
 #include <cstring>
 #include <bitset>
 #include <string>
@@ -19,6 +20,7 @@
 
 #include "driver.h"
 #include "SAT.h"
+#include "FAT.h"
 
 using namespace std;
 
@@ -35,8 +37,17 @@ int g_reserved_end = -1;	/* address for the end of resricted space on the disk
 void FormatDisk( int tracks)
 {
 	SAT sTable;
+	FAT fTable;
 	g_FAT_address = sTable.init( tracks);
 	g_tracks = tracks;
+	fTable.table_size = tracks / 7;
+	g_reserved_end = g_FAT_address + fTable.table_size;
+
+	for( int i = 0; i < fTable.table_size; i++) {
+		sTable.setBit( g_FAT_address + i, 1);
+	}
+	
+	
 }
 
 int Allocate( int &L, int S)
@@ -54,6 +65,9 @@ int Allocate( int &L, int S)
 		return 2;
 	} else {
 		*ptr = address;
+		for( int i = 0; i < S; i++) {
+			sTable.setBit( address + i, 1);
+		}
 		return 0;
 	}
 
@@ -132,21 +146,46 @@ void Restart( int totalTracks)
 }
 	// File Allocation Table Routines
 
-int CreateFile( char*, int, int & )
-	{
-	return 0;
-	}
+int CreateFile( char* fileName, int fileSize, int& fileAddress)
+{
+	FAT fTable;
+	int found = -1;
+	string name = fileName;
 
-int DestroyFile( char* )
-	{
-	return 0;
+	for( int i = g_FAT_address; i < g_reserved_end; i++) {
+		assert( ReadDisk( (unsigned char*) &FAT::fat_table, i) == 0);
+		found = fTable.exists( name);
+		
+		if( found != -1) {
+			return 4;
+		}
 	}
+	
+	fTable.add( name, fileAddress, fileSize, g_FAT_address);
+	Allocate( fileAddress, fileSize);
 
-int FindFile( char*, int &fileSize, int &track )
-	{
 	return 0;
+}
+
+int DestroyFile( char* fileName)
+{
+	FAT fTable;
+	string name = fileName;
+	int address = fTable.exists( name);
+	element item =  fTable.search( name);
+	if( address == -1) {
+		return 4;
+	} else {
+		fTable.remove( name);
+		return Release( address, item.size);
 	}
+}
+
+int FindFile( char* fileName, int &fileSize, int &fileAddress )
+{
+return 0;
+}
 
 void ListDirectory()
-	{
-	}
+{
+}
