@@ -34,42 +34,49 @@ void FAT::add( string fileName, int& address, int size, int startTrack)
 				FAT::fat_table.files[0].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[1].size == -1) {
 				FAT::fat_table.files[1].name = fileName;
 				FAT::fat_table.files[1].size = size;
 				FAT::fat_table.files[1].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[2].size == -1) {
 				FAT::fat_table.files[2].name = fileName;
 				FAT::fat_table.files[2].size = size;
 				FAT::fat_table.files[2].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[3].size == -1) {
 				FAT::fat_table.files[3].name = fileName;
 				FAT::fat_table.files[3].size = size;
 				FAT::fat_table.files[3].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[4].size == -1) {
 				FAT::fat_table.files[4].name = fileName;
 				FAT::fat_table.files[4].size = size;
 				FAT::fat_table.files[4].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[5].size == -1) {
 				FAT::fat_table.files[5].name = fileName;
 				FAT::fat_table.files[5].size = size;
 				FAT::fat_table.files[5].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			} else if( FAT::fat_table.files[6].size == -1) {
 				FAT::fat_table.files[6].name = fileName;
 				FAT::fat_table.files[6].size = size;
 				FAT::fat_table.files[6].address = i;
 				int* ptr = &address;
 				*ptr = i;
+				assert( WriteDisk( (unsigned char*) &FAT::fat_table, i) == 0);
 			}
 			break;
 		}
