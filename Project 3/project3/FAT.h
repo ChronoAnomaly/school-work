@@ -18,8 +18,8 @@ class element {
 		element()
 		{ name = "null"; size = -1; address = -1; }
 		string name;
-		unsigned short int size;
-		unsigned short int address;
+		short int size;
+		short int address;
 };
 
 class node {
