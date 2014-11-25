@@ -15,8 +15,8 @@ class DGraph {
 		void reverse();
 
 	private:
-		std::vector< std::vector<bool> > adjacent;
-		void dfs( std::vector<bool>& visited, int index);
+		std::vector< std::vector<int> > adjacent;
+		void dfs( std::vector<int>& visited, int index);
 
 };
 
