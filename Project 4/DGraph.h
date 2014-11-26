@@ -16,7 +16,7 @@ class DGraph {
 
 	private:
 		std::vector< std::vector<int> > adjacent;
-		void dfs( std::vector<int>& visited, int index);
+		void dfs( std::vector<bool>& visited, int index);
 
 };
 

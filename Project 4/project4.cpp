@@ -9,5 +9,7 @@ int main()
 
 	graph.print();
 
+	graph.traverseDFS();
+
 	return 0;
 }
