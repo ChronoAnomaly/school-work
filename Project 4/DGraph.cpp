@@ -50,6 +50,11 @@ void DGraph::print()
 	}
 }
 
+/*
+ *	traverseDFS:  This function is used to help set up the depth-first search
+ *	of the current adjacency matrix.  It creates a visited vector that will be
+ *	to check if the node being visited has previously been to.
+ */
 void DGraph::traverseDFS()
 {
 	vector<bool> visited(DGraph::adjacent.size(), false);
@@ -58,6 +63,7 @@ void DGraph::traverseDFS()
 	for (int v = 0; v < visited.size(); v++) {
 		if (!visited[v]) {
 			cout << "tree: " << ++treeCnt << endl;
+			//cout << "(" << v << ",";
 			dfs( visited, v);
 		}
 	}
@@ -65,24 +71,44 @@ void DGraph::traverseDFS()
 
 void DGraph::dfs( vector<bool>& visited, int index)
 {
-	cout << index << endl;
+	//cout << "(" << index << ", ";
+	//cout << index << endl;
 	visited[index] = true;
 
-	// 1
 
 	for (int w = 0; w < DGraph::adjacent[index].size(); w++) {
 		if (DGraph::adjacent[index][w] && !visited[w]) {
-			// 2
+			//cout << "(" << index << ", " << DGraph::adjacent[index][w];
+			cout << "(" << index << "," << w << ")" << endl;
+
 			dfs( visited, w);
-			// 3
 		}
+
 	}
 	
-	// 4
 }
 
+/*
+ *	reverse:  This function is used to reverse the current adjacency matrix.
+ *	It creates a temp 2d vectory and reads in the current matrix in reverse.
+ *	After it is done, it swaps the adjacency matrix vector out with the reversed
+ *	graph.
+ */
 void DGraph::reverse()
 {
+
+	int size = DGraph::adjacent.size();
+	vector< vector<int> > reverse;
+	reverse = vector<vector<int> >( size, vector<int>(size, false) );
+
+	for( int i = 0; i < size; i++) {
+		for( int j = 0; j < size; j++) {
+			reverse[j][i] = DGraph::adjacent[i][j];
+		}
+		
+	}
+	
+	DGraph::adjacent = reverse;
 
 }
 
