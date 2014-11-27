@@ -1,4 +1,8 @@
-
+/*
+ *	Brett Worley
+ *	CS 3100-01
+ *	10/22/14
+ */
 #include <vector>
 #include <iostream>
 #include "DGraph.h"
@@ -71,6 +75,12 @@ void DGraph::traverseDFS()
 	}
 }
 
+/*
+ *	dfs:  This function is used to recursively follow any paths that the node may
+ *	take.  It will also print out the current tree in the format of: Node label,
+ *	(v,e) if the node points to a path that does not end.  If the node ends a
+ *	current tree, then all that will be printed is the node label.
+ */
 void DGraph::dfs( vector<bool>& visited, int index)
 {
 	//cout << "(" << index << ", ";
