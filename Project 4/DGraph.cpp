@@ -62,22 +62,19 @@ void DGraph::traverseDFS()
 	int treeCnt = 0;
 	for (int v = 0; v < visited.size(); v++) {
 		if (!visited[v]) {
-			cout << "tree: " << ++treeCnt << endl;
+			cout << endl << "Tree: " << ++treeCnt << endl;
 
-			dfs( visited, v);
-			if( checkSingleTree( visited, v)) {
-				cout << "(" << v << ",null)" << endl;
-			}
 			//cout << "(" << v << ",";
-			//dfs( visited, v);
+			dfs( visited, v);
 		}
+		//cout << endl;
 	}
 }
 
 void DGraph::dfs( vector<bool>& visited, int index)
 {
 	//cout << "(" << index << ", ";
-	//cout << index << endl;
+	cout << index << " ";
 	visited[index] = true;
 
 
@@ -90,20 +87,7 @@ void DGraph::dfs( vector<bool>& visited, int index)
 		}
 
 	}
-	
-}
-
-bool DGraph::checkSingleTree( vector<bool>& visited, int index)
-{
-
-	bool singleNode = true;
-
-	for( int i = 0; i < DGraph::adjacent[index].size(); i++) {
-		if( DGraph::adjacent[index][i] && !visited[index]) {
-			singleNode = false;
-		}
-	}
-	return singleNode;
+	//cout << endl;
 }
 
 /*

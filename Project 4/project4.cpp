@@ -21,5 +21,7 @@ int main()
 
 	graph.traverseDFS();
 
+	cout << endl;
+
 	return 0;
 }

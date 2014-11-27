@@ -17,7 +17,6 @@ class DGraph {
 	private:
 		std::vector< std::vector<int> > adjacent;
 		void dfs( std::vector<bool>& visited, int index);
-		bool checkSingleTree( std::vector<bool>& visited, int index);
 
 };
 
