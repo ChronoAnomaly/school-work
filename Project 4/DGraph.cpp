@@ -20,12 +20,6 @@ void DGraph::load()
 	
 	DGraph::adjacent = vector<vector<int> >( nodes, vector<int>(nodes, false) );
 
-	/*for ( int r = 0; r < nodes; r++ ) {
-	  DGraph::adjacent.push_back(vector<int>());
-	  for (int c = 0; c < nodes; c++ ){
-	    DGraph::adjacent[r].push_back(false);
-	  }
-	}*/
 
 	for( int i = 0; i < nodes; i++) {
 
@@ -68,10 +62,8 @@ void DGraph::traverseDFS()
 		if (!visited[v]) {
 			cout << endl << "Tree: " << ++treeCnt << endl;
 
-			//cout << "(" << v << ",";
 			dfs( visited, v);
 		}
-		//cout << endl;
 	}
 }
 
@@ -83,21 +75,18 @@ void DGraph::traverseDFS()
  */
 void DGraph::dfs( vector<bool>& visited, int index)
 {
-	//cout << "(" << index << ", ";
 	cout << index << " ";
 	visited[index] = true;
 
 
 	for (int w = 0; w < DGraph::adjacent[index].size(); w++) {
 		if (DGraph::adjacent[index][w] && !visited[w]) {
-			//cout << "(" << index << ", " << DGraph::adjacent[index][w];
 			cout << "(" << index << "," << w << ")" << endl;
 
 			dfs( visited, w);
 		}
 
 	}
-	//cout << endl;
 }
 
 /*
